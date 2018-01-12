@@ -1,0 +1,46 @@
+/* css for the strategy game */
+:root {
+  }
+.overhead {
+	position: fixed;
+	width: 100%;
+	height: 7%;
+	left : 0;
+	top: 0;
+	background-color: grey;
+	text-align: center;
+}
+.board{
+	position: fixed;
+	height: 36vw;
+	width: 36vw;
+	top: 7%;
+	left: 0px;
+	background-color: #e7f7bb;
+}
+.characters{
+	position:fixed;
+	height: 93%;
+	width:	44vw;
+	background-color: #bbf7ee;
+	left:36vw;
+	top:7%;	
+}
+.log{
+	position:fixed;
+	width: 36vw;
+	height:160px;
+	bottom: 0;
+	background-color: #e8ada7;
+	left:0;
+	
+}
+.actionBar{
+	position:fixed;
+	width: 20vw;
+	height:95vh;
+	top: 7%;
+	right:0;
+	bottom:0;
+	background-color:#91b0e2;
+}
