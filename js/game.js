@@ -96,10 +96,13 @@ var map = function(x, y){
 	
 	
 } ;
-//Function to move character number whatever, to have it shoot, or to have it use an item
-var move = function(ThisNeedsAVariable){};
-var shoot = function(ThisNeedsAVariable){} ;
-var item = function(ThisNeedsAVariable){} ;
+//Functions to move character number whatever, to have it shoot, or to have it use an item
+moveChar = null;
+shootChar = null;
+itemChar = null;
+var move = function(moveChar){};
+var shoot = function(shootChar){};
+var item = function(itemChar){};
 
 var tick = function() {
 	//Ticks after every action to refresh items, health, alive and such
@@ -108,9 +111,6 @@ var tick = function() {
 		tickAlly = "ally"+ w;
 		tickActionbar="actions"+w;
 		coordinates = characters.positionx[w] + "_" + characters.positiony[w];
-		if (!(characters.alive[w])){
-			document.getElementById(coordinates).style.backgroundImage = "";
-		}
 		//Caps health to 100
 		if (characters.health[w] >= 101) {
 			characters.health[w] = 100;
@@ -122,6 +122,9 @@ var tick = function() {
 				document.getElementById(tickAlly).style.display = "none";
 				document.getElementById(tickActionbar).style.display = "none";
 			}
+		}
+		if (!(characters.alive[w])){
+			document.getElementById(coordinates).style.backgroundImage = "";
 		}
 		//Updates allies health
 		if 	(w<8) {
