@@ -18,14 +18,6 @@
 	left: 0px;
 	background-color: #e7f7bb;
 }
-.characters{
-	position:fixed;
-	height: 93%;
-	width:	44vw;
-	background-color: #bbf7ee;
-	left:36vw;
-	top:7%;	
-}
 .log{
 	position:fixed;
 	width: 36vw;
@@ -35,12 +27,41 @@
 	left:0;
 	
 }
-.actionBar{
+.characters{
 	position:fixed;
-	width: 20vw;
-	height:95vh;
-	top: 7%;
-	right:0;
-	bottom:0;
-	background-color:#91b0e2;
+	height: 93%;
+	width:	44vw;
+	background-color: #bbf7ee;
+	left:36vw;
+	top:7%;	
 }
+	.allyName{
+		color:red;
+		font-size: 1.5em;
+		text-align: center;
+	}
+
+	.actionBar{
+		position:fixed;
+		width: 20vw;
+		height:95vh;
+		top: 7%;
+		right:0;
+		bottom:0;
+		background-color:#91b0e2;
+	}
+	.ally0,
+	.ally1,
+	.ally2,
+	.ally3,
+	.ally4,
+	.ally5,
+	.ally6,
+	.ally7{
+		padding: 1px;
+		border-width: 4px;
+		border-color: black;
+		border-style: dashed;
+		display:block;
+		
+	}

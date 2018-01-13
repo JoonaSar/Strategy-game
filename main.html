@@ -26,6 +26,10 @@ Left side: board and log, right side: characters
 <div class = "board" >
 	<!-- the game board is 16 by 16 squares wide-->
 	<p>board</p>
+		<a href="#"
+				onclick="tick();">
+				<!-- Just a development button, ticks one forward-->
+				TICK</a>
 </div>
 <div class = "log">
 	<p>log</p>
@@ -37,10 +41,83 @@ Left side: board and log, right side: characters
 	<!-- From here players see their characters and manage their actions.
 	Hp bar, inventory(?), weapons (picture with link to info??), specialities(?),
 	actions: shoot, use item(?), move, special ability(?), end turn button(!) -->
-	<p>characters</p>
-	<div class = "actionBar">
-		<p>Actions</p>
+	<div id ="ally0" >
+		<p class ="allyName">ally 0</p>
+		<p id ="allyHealth0">100/100</p>
 	</div>
+	<div id ="ally1" >
+		<p class ="allyName">ally 1</p>
+		<p id ="allyHealth1">100/100</p>
+	</div>
+	<div id ="ally2" >
+		<p class ="allyName">ally 2</p>
+		<p id ="allyHealth2">100/100</p>
+	</div>
+	<div id ="ally3" >
+		<p class ="allyName">ally 3</p>
+		<p id ="allyHealth3">100/100</p>
+	</div>
+	<div id ="ally4" >
+		<p class ="allyName">ally 4</p>
+		<p id ="allyHealth4">100/100</p>
+	</div>
+	<div id ="ally5" >
+		<p class ="allyName">ally 5</p>
+		<p id ="allyHealth5">100/100</p>
+	</div>
+	<div id ="ally6" >
+		<p class ="allyName">ally 6</p>
+		<p id ="allyHealth6">100/100</p>
+	</div>
+	<div id ="ally7" >
+		<p class ="allyName">ally 7</p>
+		<p id ="allyHealth7">100/100</p>
+	</div>
+	
+	<!-- Here is the action bar, each character has few actions to do.
+		Player clicks on the action button and then on the square he wants to interact with
+		-->
+	<div class = "actionBar">
+		<div class = "actions0">
+		
+		</div>
+	</div>
+	<div class = "actionBar">
+		<div class = "actions1">
+		
+		</div>
+	</div>
+	<div class = "actionBar">
+		<div class = "actions2">
+		
+		</div>
+	</div>
+	<div class = "actionBar">
+		<div class = "actions3">
+		
+		</div>
+	</div>
+	<div class = "actionBar">
+		<div class = "actions4">
+		
+		</div>
+	</div>
+	<div class = "actionBar">
+		<div class = "actions5">
+		
+		</div>
+	</div>
+	<div class = "actionBar">
+		<div class = "actions6">
+		
+		</div>
+	</div>
+	<div class = "actionBar">
+		<div class = "actions7">
+		
+		</div>
+	</div>
+	
 </div>
 
 
