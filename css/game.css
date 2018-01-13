@@ -28,11 +28,11 @@
 	}
 .game{
 	display:flex;
-	height:93%;
 	position:fixed;
 	top: 7%;
 	left:0;
 	width:100%;
+	height:91%;
 	flex-flow: row;
 	flex-wrap:nowrap;
 	align-items: stretch;
@@ -50,38 +50,70 @@
 		.log{
 			flex:1 1 auto;
 			background-color: #e8ada7;
+			overflow:auto;
 }
-
-	.characters{
-		background-color: #bbf7ee;
-		flex:3 1 auto;
+	.rightside {
+		flex: 1 1 auto;
+		display:flex;
+		flex-flow:row;
 	}
-		.allyName{
-			color:red;
-			font-size: 1.5em;
-			text-align: center;
+		.characters{
+			flex: 3 1 auto;
+			display:flex;
+			flex-flow:column;
+			background-color: #bbf7ee;
 		}
-		}
-		.ally0,
-		.ally1,
-		.ally2,
-		.ally3,
-		.ally4,
-		.ally5,
-		.ally6,
-		.ally7{
-			padding: 1px;
-			border-width: 4px;
-			border-color: black;
-			border-style: dashed;
-			display:block;
+			.allyName{
+				color:red;
+				font-size: 1em;
+				text-align: center;
+			}
+
+			.ally{
+				border-width: 2px;
+				border-style: solid;
+				border-top-style:none;
+				border-color: black;
+				border-right-style: none;
+				flex:1 1 auto;
+			}
 			
-		}
-		
-	.action{
-			flex:1 3 auto;
+		.action{
+			flex: 1 3 auto;
 			background-color:#91b0e2;
+			display:flex;
+			flex-flow:column;
 		}
-		.actionbar{
-			
-		
+			.actionBar{
+				flex:1 1 auto;
+				display:flex;
+				flex-flow: row;
+			}
+				.moveButton,
+				.shootButton,
+				.itemButton{
+					flex:1 1 auto;
+					border: 1px dashed black;
+					color: white;
+				}
+				
+				.moveButton{
+					background-color: #5abefc;
+				}
+				.shootButton{
+					background-color: #f95959;
+				}
+				.itemButton{
+					background-color: #89af42;
+				}
+
+.credits{
+	background-color:black;
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:2%;
+	color:grey;
+	text-align:center;
+}

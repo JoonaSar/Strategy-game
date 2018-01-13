@@ -50,93 +50,144 @@ Left side: board and log, middle:characters, right side: actions
 			
 		</div>
 	</div>
-
-	<div class = "characters">
-		<!-- From here players see their characters and manage their actions.
-		Hp bar, inventory(?), weapons (picture with link to info??), specialities(?),
-		actions: shoot, use item(?), move, special ability(?), end turn button(!) -->
-		<div id ="ally0" >
-			<p class ="allyName">ally 0</p>
-			<p id ="allyHealth0">100/100</p>
-		</div>
-		<div id ="ally1" >
-			<p class ="allyName">ally 1</p>
-			<p id ="allyHealth1">100/100</p>
-		</div>
-		<div id ="ally2" >
+	<div class="rightside">
+		<div class = "characters">
+			<!-- From here players see their characters and manage their actions.
+			Hp bar, inventory(?), weapons (picture with link to info??), specialities(?),
+			actions: shoot, use item(?), move, special ability(?), end turn button(!) -->
+			<div class="ally" id ="ally0" >
+				<p class ="allyName">ally 0</p>
+				<p id ="allyHealth0">100/100</p>
+			</div>
+			<div class="ally" id ="ally1" >
+				<p class ="allyName">ally 1</p>
+				<p id ="allyHealth1">100/100</p>
+			</div>
+			<div class="ally" id ="ally2" >
 				<p class ="allyName">ally 2</p>
 				<p id ="allyHealth2">100/100</p>
 			</div>
-		<div id ="ally3" >
-			<p class ="allyName">ally 3</p>
-			<p id ="allyHealth3">100/100</p>
-		</div>
-		<div id ="ally4" >
-			<p class ="allyName">ally 4</p>
-			<p id ="allyHealth4">100/100</p>
-		</div>
-		<div id ="ally5" >
-			<p class ="allyName">ally 5</p>
-			<p id ="allyHealth5">100/100</p>
-		</div>
-		<div id ="ally6" >
-			<p class ="allyName">ally 6</p>
-			<p id ="allyHealth6">100/100</p>
-		</div>
-		<div id ="ally7" >
+			<div class="ally" id ="ally3" >
+				<p class ="allyName">ally 3</p>
+				<p id ="allyHealth3">100/100</p>
+			</div>
+			<div class="ally" id ="ally4" >
+				<p class ="allyName">ally 4</p>
+				<p id ="allyHealth4">100/100</p>
+			</div>
+			<div class="ally" id ="ally5" >
+				<p class ="allyName">ally 5</p>
+				<p id ="allyHealth5">100/100</p> 
+			</div>
+			<div class="ally" id ="ally6" >
+				<p class ="allyName">ally 6</p>
+				<p id ="allyHealth6">100/100</p>
+			</div>
+			<div class="ally" id ="ally7" >
 				<p class ="allyName">ally 7</p>
-				<p id ="allyHealth7">100/100</p>
+				<p id ="allyHealth7">100/100</p> 
 			</div>
-	</div>
-		
-	<div class="action">
-		<p>Nappi</p>
-		<!-- Here is the action bar, each character has few actions to do.
-				Player clicks on the action button and then on the square he wants to interact with
-				-->
+		</div>
+			
+		<div class="action">
+			<!-- Here is the action bar, each character has few actions to do.
+					Player clicks on the action button and then on the square he wants to interact with
+					-->
+					
+			<div class = "actionBar" id ="actions0">
+				<a class="moveButton"id="moveButton0" href="#" onclick="move(0);">
+					Move
+				</a>
+				<a class="shootButton"id="shootButton0" href="#" onclick="shoot(0);">
+					Shoot
+				</a>
+				<a class="itemButton"id="itemButton0" href="#" onclick="item(0);">
+					Use item
+				</a>
+			</div>
+			<div class = "actionBar" id ="actions1">
+				<a class="moveButton"id="moveButton1" href="#" onclick="move(1);">
+					Move
+				</a>
+				<a class="shootButton"id="shootButton1" href="#" onclick="shoot(1);">
+					Shoot
+				</a>
+				<a class="itemButton"id="itemButton1" href="#" onclick="item(1;">
+					Use item
+				</a>
+			</div>
+			<div class = "actionBar" id ="actions2">
+				<a class="moveButton"id="moveButton2" href="#" onclick="move(2);">
+					Move
+				</a>
+				<a class="shootButton"id="shootButton2" href="#" onclick="shoot(2);">
+					Shoot
+				</a>
+				<a class="itemButton"id="itemButton2" href="#" onclick="item(2;">
+					Use item
+				</a>
+			</div>
+			<div class = "actionBar" id ="actions3">
+				<a class="moveButton"id="moveButton3" href="#" onclick="move(3);">
+					Move
+				</a>
+				<a class="shootButton"id="shootButton3" href="#" onclick="shoot(3);">
+					Shoot
+				</a>
+				<a class="itemButton"id="itemButton3" href="#" onclick="item(3);">
+					Use item
+				</a>
+			</div>
+			<div class = "actionBar" id ="actions4">
+				<a class="moveButton"id="moveButton4" href="#" onclick="move(4);">
+					Move
+				</a>
+				<a class="shootButton"id="shootButton4" href="#" onclick="shoot(4);">
+					Shoot
+				</a>
+				<a class="itemButton"id="itemButton4" href="#" onclick="item(4);">
+					Use item
+				</a>
+			</div>
+			<div class = "actionBar" id ="actions5">
+				<a class="moveButton"id="moveButton5" href="#" onclick="move(5);">
+					Move
+				</a>
+				<a class="shootButton"id="shootButton5" href="#" onclick="shoot(5);">
+					Shoot
+				</a>
+				<a class="itemButton"id="itemButton5" href="#" onclick="item(5);">
+					Use item
+				</a>
+			</div>
+			<div class = "actionBar" id ="actions6">
+				<a class="moveButton"id="moveButton6" href="#" onclick="move(6);">
+					Move
+				</a>
+				<a class="shootButton"id="shootButton6" href="#" onclick="shoot(6);">
+					Shoot
+				</a>
+				<a class="itemButton"id="itemButton6" href="#" onclick="item(6);">
+					Use item
+				</a>
+			</div>
+			<div class = "actionBar" id ="actions7">
+				<a class="moveButton"id="moveButton7" href="#" onclick="move(7);">
+					Move
+				</a>
+				<a class="shootButton"id="shootButton7" href="#" onclick="shoot(7);">
+					Shoot
+				</a>
+				<a class="itemButton"id="itemButton7" href="#" onclick="item(7);">
+					Use item
+				</a>
+			</div>
 				
-		<div class = "actionBar">
-			<div class = "actions0">
-			</div>
 		</div>
-		<div class = "actionBar">
-			<div class = "actions1">
-			
-			</div>
-		</div>
-		<div class = "actionBar">
-			<div class = "actions2">
-			
-			</div>
-		</div>
-		<div class = "actionBar">
-			<div class = "actions3">
-			
-			</div>
-		</div>
-		<div class = "actionBar">
-			<div class = "actions4">
-			
-			</div>
-		</div>
-		<div class = "actionBar">
-			<div class = "actions5">
-			
-			</div>
-		</div>
-		<div class = "actionBar">
-			<div class = "actions6">
-			
-			</div>
-		</div>
-		<div class = "actionBar">
-			<div class = "actions7">
-				
-			</div>
-		</div>
-			
 	</div>
-
+</div>
+<div class="credits">
+	credits:Joona Särkijärvi 2018
 </div>
 </body>
 </html>
