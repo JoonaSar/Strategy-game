@@ -19,38 +19,41 @@ var characters = {
 	abilities: [null]
 };
 
-// Variable to fix tick-function
+// Variables to fix tick-function
 var tickHealth = null;
 var tickAlly = null;
 
 var tick = function() {
 	//Ticks after every action to refresh items, health, alive and such
-	for (i = 0; i<7; i++) {
-		// Updates health
+	for (i = 0; i<24; i++) {
 		tickHealth = "allyHealth"+ i;
 		tickAlly = "ally"+ i;
-		document.getElementById(tickHealth).innerHTML = characters.health[i] +"/100";
-		
-		if (characters.health[i] <= 0 ) {
-			characters.alive[i] = false;
-			//variable to fix the function
-			document.getElementById(tickAlly).style.display = "none";
-		if (characters.health[i] > 100) {
+		//Caps health to 100
+		if (characters.health[i] >= 101) {
 			characters.health[i] = 100;
 		}
+		//Removes dead allies
+		if (characters.health[i] <= 0 ) {
+			characters.alive[i] = false;
+			if	(i <8) {
+				document.getElementById(tickAlly).style.display = "none";
+			}
 		}
-	}
-	
+		//Updates allies health
+		if 	(i<8) {
+		document.getElementById(tickHealth).innerHTML = characters.health[i] +"/100";
+		}
+		}
 };
 var damageTo =null;
-var damageAmmount =null;
-var damage = function(damageTo, damageAmmount) {
+var damageAmount =null;
+var damage = function(damageTo, damageAmount) {
 	//This line is for testing only
 	damageTo = document.getElementById("dmgTo").value;
-	damageAmmount = document.getElementById("dmgAm").value;
-	damageAmmount = document.getElementById("dmgAm").value;
+	damageAmount = document.getElementById("dmgAm").value;
+	damageAmount = document.getElementById("dmgAm").value;
 	//This line is for testing only
 	
-	characters.health[damageTo] = characters.health[damageTo] - damageAmmount;
+	characters.health[damageTo] = characters.health[damageTo] - damageAmount;
 };
 
