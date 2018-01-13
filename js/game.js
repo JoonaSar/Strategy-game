@@ -35,6 +35,9 @@ var tick = function() {
 			characters.alive[i] = false;
 			//variable to fix the function
 			document.getElementById(tickAlly).style.display = "none";
+		if (characters.health[i] > 100) {
+			characters.health[i] = 100;
+		}
 		}
 	}
 	
