@@ -61,3 +61,5 @@ var damage = function(damageTo, damageAmount) {
 	characters.health[damageTo] = characters.health[damageTo] - damageAmount;
 };
 
+
+
