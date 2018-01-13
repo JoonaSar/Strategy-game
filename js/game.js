@@ -11,17 +11,56 @@ var characters = {
 			 100,100,100,100,100,100,100,100],
 	alive:	[true,true,true,true,true,true,true,true,
 			 true,true,true,true,true,true,true,true,
-			 true,true,true,true,true,true,true,true],
+			 false,false,false,false,false,false,false,false],
+	enemyAm: 8,
+	alliesAm: 8,
 	weapons:["rifle","rifle","rifle","rifle","rifle","rifle","rifle","rifle",
 			 "rifle","rifle","rifle","rifle","rifle","rifle","rifle","rifle",
 			 "rifle","rifle","rifle","rifle","rifle","rifle","rifle","rifle"],
 	items: null,
-	position:["0_0","0_0","0_0","0_0","0_0","0_0","0_0","0_0",
-			  "0_0","0_0","0_0","0_0","0_0","0_0","0_0","0_0",
-			  "0_0","0_0","0_0","0_0","0_0","0_0","0_0","0_0"],
-	abilities: [null]
+	positionx:[0,0,0,0,0,0,0,0,
+			   15,15,15,15,15,15,15,15,
+			   0,0,0,0,0,0,0,0],
+	positiony:[0,2,4,6,8,10,12,14,
+			   0,2,4,6,8,10,12,14,
+			   0,0,0,0,0,0,0,0],
+	abilities: [null],
+	//draws all characters
+	load: function(){
+		for (i = 0; i<24; i++){
+			if(characters.alive[i]){
+				coordinates = characters.positionx[i] + "_" + characters.positiony[i];
+				if (i<8){
+					document.getElementById(coordinates).style.backgroundImage = "url('img/ally.png')";
+				}
+				else {
+					document.getElementById(coordinates).style.backgroundImage = "url('img/enemy.png')";
+				}
+			}
+		}
+	}
 };
-
+// Function that runs through every time you start 
+var start = function(){
+	//Clears the alive-status of all characters
+	for (q = 0; q<24; q++){
+		characters.alive[q]= false;
+	};
+	//Brings a set number of allies to life and gives them a position
+	for (q = 0; q<characters.alliesAm; q++){
+		characters.alive[q] = true;
+		characters.positionx[q] = 0;
+		characters.positiony[q] = (2*q);
+	};
+	//Brings a set number of enemies to life and gives them a position
+	for (q = 0; q<characters.enemyAm; q++){
+		characters.alive[q+8] = true; 
+		characters.positionx[q+8] = 15;
+		characters.positiony[q+8] = (2*q);
+	};
+	tick();
+	characters.load();
+};
 // Variables to fix tick-function
 var tickHealth = null;
 var tickAlly = null;
@@ -35,6 +74,8 @@ var map = function(x, y){
 	//This function is only in test use right now, the rest should be ok
 	coordinates = x +"_" + y;
 	document.getElementById(coordinates).style.backgroundColor = "red";
+	
+	
 } ;
 //Function to move character number whatever, to have it shoot, or to have it use an item
 var move = function(ThisNeedsAVariable){};

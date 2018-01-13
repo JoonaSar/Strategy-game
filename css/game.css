@@ -13,6 +13,13 @@
 	.overheadLeft{
 		background-color: #292956;
 		flex: 1 1 auto;
+		font-size: 1.8em;
+		text-decoration: none;
+		color: white;
+		font-family: monospace;
+		text-transform: capitalize;
+		text-align: center;
+		
 	}
 	.overheadMiddle{
 		background-color: grey;
@@ -56,6 +63,7 @@
 			}
 				.square{
 					flex: 1 1 auto;
+					border: 1px black dotted;
 				}
 			
 		.log{
