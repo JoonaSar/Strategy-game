@@ -46,12 +46,18 @@
 		.board{
 			flex: 0 0 640px;
 			background-color: #e7f7bb;
+			display:flex;
+			flex-flow:row;
 		}
-			.square{
-				width:38px;
-				height:38px;
-				border: 1px dotted grey;
+			.column{
+				flex: 1 1 auto;
+				display:flex;
+				flex-flow:column;
 			}
+				.square{
+					flex: 1 1 auto;
+				}
+			
 		.log{
 			flex:1 1 auto;
 			background-color: #e8ada7;

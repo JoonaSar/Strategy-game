@@ -16,6 +16,9 @@ var characters = {
 			 "rifle","rifle","rifle","rifle","rifle","rifle","rifle","rifle",
 			 "rifle","rifle","rifle","rifle","rifle","rifle","rifle","rifle"],
 	items: null,
+	position:["0_0","0_0","0_0","0_0","0_0","0_0","0_0","0_0",
+			  "0_0","0_0","0_0","0_0","0_0","0_0","0_0","0_0",
+			  "0_0","0_0","0_0","0_0","0_0","0_0","0_0","0_0"],
 	abilities: [null]
 };
 
@@ -23,6 +26,20 @@ var characters = {
 var tickHealth = null;
 var tickAlly = null;
 var tickActionbar = null;
+//Output variables for the map function
+var x = null;
+var y = null;
+var coordinates = null;
+//Outputs coordinates of the clicked square
+var map = function(x, y){
+	//This function is only in test use right now, the rest should be ok
+	coordinates = x +"_" + y;
+	document.getElementById(coordinates).style.backgroundColor = "red";
+} ;
+//Function to move character number whatever, to have it shoot, or to have it use an item
+var move = function(ThisNeedsAVariable){};
+var shoot = function(ThisNeedsAVariable){} ;
+var item = function(ThisNeedsAVariable){} ;
 
 var tick = function() {
 	//Ticks after every action to refresh items, health, alive and such
@@ -60,6 +77,5 @@ var damage = function(damageTo, damageAmount) {
 	
 	characters.health[damageTo] = characters.health[damageTo] - damageAmount;
 };
-
 
 

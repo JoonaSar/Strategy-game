@@ -25,298 +25,296 @@ Left side: board and log, middle:characters, right side: actions
 <div class="game">
 	<div class="leftside">
 		<div class = "board" >
-			<!-- the game board is 16 by 16 squares wide-->
-			<table>
-			<tr>
-				<th class="square" id="0_0">0,0</th>
-				<th class="square" id="0_1">0,1</th>
-				<th class="square" id="0_2">0,2</th>
-				<th class="square" id="0_3">0,3</th>
-				<th class="square" id="0_4">0,4</th>
-				<th class="square" id="0_5">0,5</th>
-				<th class="square" id="0_6">0,6</th>
-				<th class="square" id="0_7">0,7</th>
-				<th class="square" id="0_8">0,8</th>
-				<th class="square" id="0_9">0,9</th>
-				<th class="square" id="0_10">0,10</th>
-				<th class="square" id="0_11">0,11</th>
-				<th class="square" id="0_12">0,12</th>
-				<th class="square" id="0_13">0,13</th>
-				<th class="square" id="0_14">0,14</th>
-				<th class="square" id="0_15">0,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="1_0">1,0</th>
-				<th class="square" id="1_1">1,1</th>
-				<th class="square" id="1_2">1,2</th>
-				<th class="square" id="1_3">1,3</th>
-				<th class="square" id="1_4">1,4</th>
-				<th class="square" id="1_5">1,5</th>
-				<th class="square" id="1_6">1,6</th>
-				<th class="square" id="1_7">1,7</th>
-				<th class="square" id="1_8">1,8</th>
-				<th class="square" id="1_9">1,9</th>
-				<th class="square" id="1_10">1,10</th>
-				<th class="square" id="1_11">1,11</th>
-				<th class="square" id="1_12">1,12</th>
-				<th class="square" id="1_13">1,13</th>
-				<th class="square" id="1_14">1,14</th>
-				<th class="square" id="1_15">1,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="2_0">2,0</th>
-				<th class="square" id="2_1">2,1</th>
-				<th class="square" id="2_2">2,2</th>
-				<th class="square" id="2_3">2,3</th>
-				<th class="square" id="2_4">2,4</th>
-				<th class="square" id="2_5">2,5</th>
-				<th class="square" id="2_6">2,6</th>
-				<th class="square" id="2_7">2,7</th>
-				<th class="square" id="2_8">2,8</th>
-				<th class="square" id="2_9">2,9</th>
-				<th class="square" id="2_10">2,10</th>
-				<th class="square" id="2_11">2,11</th>
-				<th class="square" id="2_12">2,12</th>
-				<th class="square" id="2_13">2,13</th>
-				<th class="square" id="2_14">2,14</th>
-				<th class="square" id="2_15">2,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="3_0">3,0</th>
-				<th class="square" id="3_1">3,1</th>
-				<th class="square" id="3_2">3,2</th>
-				<th class="square" id="3_3">3,3</th>
-				<th class="square" id="3_4">3,4</th>
-				<th class="square" id="3_5">3,5</th>
-				<th class="square" id="3_6">3,6</th>
-				<th class="square" id="3_7">3,7</th>
-				<th class="square" id="3_8">3,8</th>
-				<th class="square" id="3_9">3,9</th>
-				<th class="square" id="3_10">3,10</th>
-				<th class="square" id="3_11">3,11</th>
-				<th class="square" id="3_12">3,12</th>
-				<th class="square" id="3_13">3,13</th>
-				<th class="square" id="3_14">3,14</th>
-				<th class="square" id="3_15">3,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="4_0">4,0</th>
-				<th class="square" id="4_1">4,1</th>
-				<th class="square" id="4_2">4,2</th>
-				<th class="square" id="4_3">4,3</th>
-				<th class="square" id="4_4">4,4</th>
-				<th class="square" id="4_5">4,5</th>
-				<th class="square" id="4_6">4,6</th>
-				<th class="square" id="4_7">4,7</th>
-				<th class="square" id="4_8">4,8</th>
-				<th class="square" id="4_9">4,9</th>
-				<th class="square" id="4_10">4,10</th>
-				<th class="square" id="4_11">4,11</th>
-				<th class="square" id="4_12">4,12</th>
-				<th class="square" id="4_13">4,13</th>
-				<th class="square" id="4_14">4,14</th>
-				<th class="square" id="4_15">4,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="5_0">5,0</th>
-				<th class="square" id="5_1">5,1</th>
-				<th class="square" id="5_2">5,2</th>
-				<th class="square" id="5_3">5,3</th>
-				<th class="square" id="5_4">5,4</th>
-				<th class="square" id="5_5">5,5</th>
-				<th class="square" id="5_6">5,6</th>
-				<th class="square" id="5_7">5,7</th>
-				<th class="square" id="5_8">5,8</th>
-				<th class="square" id="5_9">5,9</th>
-				<th class="square" id="5_10">5,10</th>
-				<th class="square" id="5_11">5,11</th>
-				<th class="square" id="5_12">5,12</th>
-				<th class="square" id="5_13">5,13</th>
-				<th class="square" id="5_14">5,14</th>
-				<th class="square" id="5_15">5,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="6_0">6,0</th>
-				<th class="square" id="6_1">6,1</th>
-				<th class="square" id="6_2">6,2</th>
-				<th class="square" id="6_3">6,3</th>
-				<th class="square" id="6_4">6,4</th>
-				<th class="square" id="6_5">6,5</th>
-				<th class="square" id="6_6">6,6</th>
-				<th class="square" id="6_7">6,7</th>
-				<th class="square" id="6_8">6,8</th>
-				<th class="square" id="6_9">6,9</th>
-				<th class="square" id="6_10">6,10</th>
-				<th class="square" id="6_11">6,11</th>
-				<th class="square" id="6_12">6,12</th>
-				<th class="square" id="6_13">6,13</th>
-				<th class="square" id="6_14">6,14</th>
-				<th class="square" id="6_15">6,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="7_0">7,0</th>
-				<th class="square" id="7_1">7,1</th>
-				<th class="square" id="7_2">7,2</th>
-				<th class="square" id="7_3">7,3</th>
-				<th class="square" id="7_4">7,4</th>
-				<th class="square" id="7_5">7,5</th>
-				<th class="square" id="7_6">7,6</th>
-				<th class="square" id="7_7">7,7</th>
-				<th class="square" id="7_8">7,8</th>
-				<th class="square" id="7_9">7,9</th>
-				<th class="square" id="7_10">7,10</th>
-				<th class="square" id="7_11">7,11</th>
-				<th class="square" id="7_12">7,12</th>
-				<th class="square" id="7_13">7,13</th>
-				<th class="square" id="7_14">7,14</th>
-				<th class="square" id="7_15">7,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="8_0">8,0</th>
-				<th class="square" id="8_1">8,1</th>
-				<th class="square" id="8_2">8,2</th>
-				<th class="square" id="8_3">8,3</th>
-				<th class="square" id="8_4">8,4</th>
-				<th class="square" id="8_5">8,5</th>
-				<th class="square" id="8_6">8,6</th>
-				<th class="square" id="8_7">8,7</th>
-				<th class="square" id="8_8">8,8</th>
-				<th class="square" id="8_9">8,9</th>
-				<th class="square" id="8_10">8,10</th>
-				<th class="square" id="8_11">8,11</th>
-				<th class="square" id="8_12">8,12</th>
-				<th class="square" id="8_13">8,13</th>
-				<th class="square" id="8_14">8,14</th>
-				<th class="square" id="8_15">8,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="9_0">9,0</th>
-				<th class="square" id="9_1">9,1</th>
-				<th class="square" id="9_2">9,2</th>
-				<th class="square" id="9_3">9,3</th>
-				<th class="square" id="9_4">9,4</th>
-				<th class="square" id="9_5">9,5</th>
-				<th class="square" id="9_6">9,6</th>
-				<th class="square" id="9_7">9,7</th>
-				<th class="square" id="9_8">9,8</th>
-				<th class="square" id="9_9">9,9</th>
-				<th class="square" id="9_10">9,10</th>
-				<th class="square" id="9_11">9,11</th>
-				<th class="square" id="9_12">9,12</th>
-				<th class="square" id="9_13">9,13</th>
-				<th class="square" id="9_14">9,14</th>
-				<th class="square" id="9_15">9,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="10_0">10,0</th>
-				<th class="square" id="10_1">10,1</th>
-				<th class="square" id="10_2">10,2</th>
-				<th class="square" id="10_3">10,3</th>
-				<th class="square" id="10_4">10,4</th>
-				<th class="square" id="10_5">10,5</th>
-				<th class="square" id="10_6">10,6</th>
-				<th class="square" id="10_7">10,7</th>
-				<th class="square" id="10_8">10,8</th>
-				<th class="square" id="10_9">10,9</th>
-				<th class="square" id="10_10">10,10</th>
-				<th class="square" id="10_11">10,11</th>
-				<th class="square" id="10_12">10,12</th>
-				<th class="square" id="10_13">10,13</th>
-				<th class="square" id="10_14">10,14</th>
-				<th class="square" id="10_15">10,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="11_0">11,0</th>
-				<th class="square" id="11_1">11,1</th>
-				<th class="square" id="11_2">11,2</th>
-				<th class="square" id="11_3">11,3</th>
-				<th class="square" id="11_4">11,4</th>
-				<th class="square" id="11_5">11,5</th>
-				<th class="square" id="11_6">11,6</th>
-				<th class="square" id="11_7">11,7</th>
-				<th class="square" id="11_8">11,8</th>
-				<th class="square" id="11_9">11,9</th>
-				<th class="square" id="11_10">11,10</th>
-				<th class="square" id="11_11">11,11</th>
-				<th class="square" id="11_12">11,12</th>
-				<th class="square" id="11_13">11,13</th>
-				<th class="square" id="11_14">11,14</th>
-				<th class="square" id="11_15">11,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="12_0">12,0</th>
-				<th class="square" id="12_1">12,1</th>
-				<th class="square" id="12_2">12,2</th>
-				<th class="square" id="12_3">12,3</th>
-				<th class="square" id="12_4">12,4</th>
-				<th class="square" id="12_5">12,5</th>
-				<th class="square" id="12_6">12,6</th>
-				<th class="square" id="12_7">12,7</th>
-				<th class="square" id="12_8">12,8</th>
-				<th class="square" id="12_9">12,9</th>
-				<th class="square" id="12_10">12,10</th>
-				<th class="square" id="12_11">12,11</th>
-				<th class="square" id="12_12">12,12</th>
-				<th class="square" id="12_13">12,13</th>
-				<th class="square" id="12_14">12,14</th>
-				<th class="square" id="12_15">12,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="13_0">13,0</th>
-				<th class="square" id="13_1">13,1</th>
-				<th class="square" id="13_2">13,2</th>
-				<th class="square" id="13_3">13,3</th>
-				<th class="square" id="13_4">13,4</th>
-				<th class="square" id="13_5">13,5</th>
-				<th class="square" id="13_6">13,6</th>
-				<th class="square" id="13_7">13,7</th>
-				<th class="square" id="13_8">13,8</th>
-				<th class="square" id="13_9">13,9</th>
-				<th class="square" id="13_10">13,10</th>
-				<th class="square" id="13_11">13,11</th>
-				<th class="square" id="13_12">13,12</th>
-				<th class="square" id="13_13">13,13</th>
-				<th class="square" id="13_14">13,14</th>
-				<th class="square" id="13_15">13,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="14_0">14,0</th>
-				<th class="square" id="14_1">14,1</th>
-				<th class="square" id="14_2">14,2</th>
-				<th class="square" id="14_3">14,3</th>
-				<th class="square" id="14_4">14,4</th>
-				<th class="square" id="14_5">14,5</th>
-				<th class="square" id="14_6">14,6</th>
-				<th class="square" id="14_7">14,7</th>
-				<th class="square" id="14_8">14,8</th>
-				<th class="square" id="14_9">14,9</th>
-				<th class="square" id="14_10">14,10</th>
-				<th class="square" id="14_11">14,11</th>
-				<th class="square" id="14_12">14,12</th>
-				<th class="square" id="14_13">14,13</th>
-				<th class="square" id="14_14">14,14</th>
-				<th class="square" id="14_15">14,15</th>
-			</tr>
-			<tr>
-				<th class="square" id="15_0">15,0</th>
-				<th class="square" id="15_1">15,1</th>
-				<th class="square" id="15_2">15,2</th>
-				<th class="square" id="15_3">15,3</th>
-				<th class="square" id="15_4">15,4</th>
-				<th class="square" id="15_5">15,5</th>
-				<th class="square" id="15_6">15,6</th>
-				<th class="square" id="15_7">15,7</th>
-				<th class="square" id="15_8">15,8</th>
-				<th class="square" id="15_9">15,9</th>
-				<th class="square" id="15_10">15,10</th>
-				<th class="square" id="15_11">15,11</th>
-				<th class="square" id="15_12">15,12</th>
-				<th class="square" id="15_13">15,13</th>
-				<th class="square" id="15_14">15,14</th>
-				<th class="square" id="15_15">15,15</th>
-			</tr>
-			
-			</table>
+			<!--The game board is 16 by 16 squares wide
+				Each board-->
+				<div class= "column">
+					<a href="#" class="square" id="0_0" onclick="map(0, 0);"></a>
+					<a href="#" class="square" id="0_1" onclick="map(0, 1);"></a>
+					<a href="#" class="square" id="0_2" onclick="map(0, 2);"></a>
+					<a href="#" class="square" id="0_3" onclick="map(0, 3);"></a>
+					<a href="#" class="square" id="0_4" onclick="map(0, 4);"></a>
+					<a href="#" class="square" id="0_5" onclick="map(0, 5);"></a>
+					<a href="#" class="square" id="0_6" onclick="map(0, 6);"></a>
+					<a href="#" class="square" id="0_7" onclick="map(0, 7);"></a>
+					<a href="#" class="square" id="0_8" onclick="map(0, 8);"></a>
+					<a href="#" class="square" id="0_9" onclick="map(0, 9);"></a>
+					<a href="#" class="square" id="0_10" onclick="map(0, 10);"></a>
+					<a href="#" class="square" id="0_11" onclick="map(0, 11);"></a>
+					<a href="#" class="square" id="0_12" onclick="map(0, 12);"></a>
+					<a href="#" class="square" id="0_13" onclick="map(0, 13);"></a>
+					<a href="#" class="square" id="0_14" onclick="map(0, 14);"></a>
+					<a href="#" class="square" id="0_15" onclick="map(0, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="1_0" onclick="map(1, 0);"></a>
+					<a href="#" class="square" id="1_1" onclick="map(1, 1);"></a>
+					<a href="#" class="square" id="1_2" onclick="map(1, 2);"></a>
+					<a href="#" class="square" id="1_3" onclick="map(1, 3);"></a>
+					<a href="#" class="square" id="1_4" onclick="map(1, 4);"></a>
+					<a href="#" class="square" id="1_5" onclick="map(1, 5);"></a>
+					<a href="#" class="square" id="1_6" onclick="map(1, 6);"></a>
+					<a href="#" class="square" id="1_7" onclick="map(1, 7);"></a>
+					<a href="#" class="square" id="1_8" onclick="map(1, 8);"></a>
+					<a href="#" class="square" id="1_9" onclick="map(1, 9);"></a>
+					<a href="#" class="square" id="1_10" onclick="map(1, 10);"></a>
+					<a href="#" class="square" id="1_11" onclick="map(1, 11);"></a>
+					<a href="#" class="square" id="1_12" onclick="map(1, 12);"></a>
+					<a href="#" class="square" id="1_13" onclick="map(1, 13);"></a>
+					<a href="#" class="square" id="1_14" onclick="map(1, 14);"></a>
+					<a href="#" class="square" id="1_15" onclick="map(1, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="2_0" onclick="map(2, 0);"></a>
+					<a href="#" class="square" id="2_1" onclick="map(2, 1);"></a>
+					<a href="#" class="square" id="2_2" onclick="map(2, 2);"></a>
+					<a href="#" class="square" id="2_3" onclick="map(2, 3);"></a>
+					<a href="#" class="square" id="2_4" onclick="map(2, 4);"></a>
+					<a href="#" class="square" id="2_5" onclick="map(2, 5);"></a>
+					<a href="#" class="square" id="2_6" onclick="map(2, 6);"></a>
+					<a href="#" class="square" id="2_7" onclick="map(2, 7);"></a>
+					<a href="#" class="square" id="2_8" onclick="map(2, 8);"></a>
+					<a href="#" class="square" id="2_9" onclick="map(2, 9);"></a>
+					<a href="#" class="square" id="2_10" onclick="map(2, 10);"></a>
+					<a href="#" class="square" id="2_11" onclick="map(2, 11);"></a>
+					<a href="#" class="square" id="2_12" onclick="map(2, 12);"></a>
+					<a href="#" class="square" id="2_13" onclick="map(2, 13);"></a>
+					<a href="#" class="square" id="2_14" onclick="map(2, 14);"></a>
+					<a href="#" class="square" id="2_15" onclick="map(2, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="3_0" onclick="map(3, 0);"></a>
+					<a href="#" class="square" id="3_1" onclick="map(3, 1);"></a>
+					<a href="#" class="square" id="3_2" onclick="map(3, 2);"></a>
+					<a href="#" class="square" id="3_3" onclick="map(3, 3);"></a>
+					<a href="#" class="square" id="3_4" onclick="map(3, 4);"></a>
+					<a href="#" class="square" id="3_5" onclick="map(3, 5);"></a>
+					<a href="#" class="square" id="3_6" onclick="map(3, 6);"></a>
+					<a href="#" class="square" id="3_7" onclick="map(3, 7);"></a>
+					<a href="#" class="square" id="3_8" onclick="map(3, 8);"></a>
+					<a href="#" class="square" id="3_9" onclick="map(3, 9);"></a>
+					<a href="#" class="square" id="3_10" onclick="map(3, 10);"></a>
+					<a href="#" class="square" id="3_11" onclick="map(3, 11);"></a>
+					<a href="#" class="square" id="3_12" onclick="map(3, 12);"></a>
+					<a href="#" class="square" id="3_13" onclick="map(3, 13);"></a>
+					<a href="#" class="square" id="3_14" onclick="map(3, 14);"></a>
+					<a href="#" class="square" id="3_15" onclick="map(3, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="4_0" onclick="map(4, 0);"></a>
+					<a href="#" class="square" id="4_1" onclick="map(4, 1);"></a>
+					<a href="#" class="square" id="4_2" onclick="map(4, 2);"></a>
+					<a href="#" class="square" id="4_3" onclick="map(4, 3);"></a>
+					<a href="#" class="square" id="4_4" onclick="map(4, 4);"></a>
+					<a href="#" class="square" id="4_5" onclick="map(4, 5);"></a>
+					<a href="#" class="square" id="4_6" onclick="map(4, 6);"></a>
+					<a href="#" class="square" id="4_7" onclick="map(4, 7);"></a>
+					<a href="#" class="square" id="4_8" onclick="map(4, 8);"></a>
+					<a href="#" class="square" id="4_9" onclick="map(4, 9);"></a>
+					<a href="#" class="square" id="4_10" onclick="map(4, 10);"></a>
+					<a href="#" class="square" id="4_11" onclick="map(4, 11);"></a>
+					<a href="#" class="square" id="4_12" onclick="map(4, 12);"></a>
+					<a href="#" class="square" id="4_13" onclick="map(4, 13);"></a>
+					<a href="#" class="square" id="4_14" onclick="map(4, 14);"></a>
+					<a href="#" class="square" id="4_15" onclick="map(4, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="5_0" onclick="map(5, 0);"></a>
+					<a href="#" class="square" id="5_1" onclick="map(5, 1);"></a>
+					<a href="#" class="square" id="5_2" onclick="map(5, 2);"></a>
+					<a href="#" class="square" id="5_3" onclick="map(5, 3);"></a>
+					<a href="#" class="square" id="5_4" onclick="map(5, 4);"></a>
+					<a href="#" class="square" id="5_5" onclick="map(5, 5);"></a>
+					<a href="#" class="square" id="5_6" onclick="map(5, 6);"></a>
+					<a href="#" class="square" id="5_7" onclick="map(5, 7);"></a>
+					<a href="#" class="square" id="5_8" onclick="map(5, 8);"></a>
+					<a href="#" class="square" id="5_9" onclick="map(5, 9);"></a>
+					<a href="#" class="square" id="5_10" onclick="map(5, 10);"></a>
+					<a href="#" class="square" id="5_11" onclick="map(5, 11);"></a>
+					<a href="#" class="square" id="5_12" onclick="map(5, 12);"></a>
+					<a href="#" class="square" id="5_13" onclick="map(5, 13);"></a>
+					<a href="#" class="square" id="5_14" onclick="map(5, 14);"></a>
+					<a href="#" class="square" id="5_15" onclick="map(5, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="6_0" onclick="map(6, 0);"></a>
+					<a href="#" class="square" id="6_1" onclick="map(6, 1);"></a>
+					<a href="#" class="square" id="6_2" onclick="map(6, 2);"></a>
+					<a href="#" class="square" id="6_3" onclick="map(6, 3);"></a>
+					<a href="#" class="square" id="6_4" onclick="map(6, 4);"></a>
+					<a href="#" class="square" id="6_5" onclick="map(6, 5);"></a>
+					<a href="#" class="square" id="6_6" onclick="map(6, 6);"></a>
+					<a href="#" class="square" id="6_7" onclick="map(6, 7);"></a>
+					<a href="#" class="square" id="6_8" onclick="map(6, 8);"></a>
+					<a href="#" class="square" id="6_9" onclick="map(6, 9);"></a>
+					<a href="#" class="square" id="6_10" onclick="map(6, 10);"></a>
+					<a href="#" class="square" id="6_11" onclick="map(6, 11);"></a>
+					<a href="#" class="square" id="6_12" onclick="map(6, 12);"></a>
+					<a href="#" class="square" id="6_13" onclick="map(6, 13);"></a>
+					<a href="#" class="square" id="6_14" onclick="map(6, 14);"></a>
+					<a href="#" class="square" id="6_15" onclick="map(6, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="7_0" onclick="map(7, 0);"></a>
+					<a href="#" class="square" id="7_1" onclick="map(7, 1);"></a>
+					<a href="#" class="square" id="7_2" onclick="map(7, 2);"></a>
+					<a href="#" class="square" id="7_3" onclick="map(7, 3);"></a>
+					<a href="#" class="square" id="7_4" onclick="map(7, 4);"></a>
+					<a href="#" class="square" id="7_5" onclick="map(7, 5);"></a>
+					<a href="#" class="square" id="7_6" onclick="map(7, 6);"></a>
+					<a href="#" class="square" id="7_7" onclick="map(7, 7);"></a>
+					<a href="#" class="square" id="7_8" onclick="map(7, 8);"></a>
+					<a href="#" class="square" id="7_9" onclick="map(7, 9);"></a>
+					<a href="#" class="square" id="7_10" onclick="map(7, 10);"></a>
+					<a href="#" class="square" id="7_11" onclick="map(7, 11);"></a>
+					<a href="#" class="square" id="7_12" onclick="map(7, 12);"></a>
+					<a href="#" class="square" id="7_13" onclick="map(7, 13);"></a>
+					<a href="#" class="square" id="7_14" onclick="map(7, 14);"></a>
+					<a href="#" class="square" id="7_15" onclick="map(7, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="8_0" onclick="map(8, 0);"></a>
+					<a href="#" class="square" id="8_1" onclick="map(8, 1);"></a>
+					<a href="#" class="square" id="8_2" onclick="map(8, 2);"></a>
+					<a href="#" class="square" id="8_3" onclick="map(8, 3);"></a>
+					<a href="#" class="square" id="8_4" onclick="map(8, 4);"></a>
+					<a href="#" class="square" id="8_5" onclick="map(8, 5);"></a>
+					<a href="#" class="square" id="8_6" onclick="map(8, 6);"></a>
+					<a href="#" class="square" id="8_7" onclick="map(8, 7);"></a>
+					<a href="#" class="square" id="8_8" onclick="map(8, 8);"></a>
+					<a href="#" class="square" id="8_9" onclick="map(8, 9);"></a>
+					<a href="#" class="square" id="8_10" onclick="map(8, 10);"></a>
+					<a href="#" class="square" id="8_11" onclick="map(8, 11);"></a>
+					<a href="#" class="square" id="8_12" onclick="map(8, 12);"></a>
+					<a href="#" class="square" id="8_13" onclick="map(8, 13);"></a>
+					<a href="#" class="square" id="8_14" onclick="map(8, 14);"></a>
+					<a href="#" class="square" id="8_15" onclick="map(8, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="9_0" onclick="map(9, 0);"></a>
+					<a href="#" class="square" id="9_1" onclick="map(9, 1);"></a>
+					<a href="#" class="square" id="9_2" onclick="map(9, 2);"></a>
+					<a href="#" class="square" id="9_3" onclick="map(9, 3);"></a>
+					<a href="#" class="square" id="9_4" onclick="map(9, 4);"></a>
+					<a href="#" class="square" id="9_5" onclick="map(9, 5);"></a>
+					<a href="#" class="square" id="9_6" onclick="map(9, 6);"></a>
+					<a href="#" class="square" id="9_7" onclick="map(9, 7);"></a>
+					<a href="#" class="square" id="9_8" onclick="map(9, 8);"></a>
+					<a href="#" class="square" id="9_9" onclick="map(9, 9);"></a>
+					<a href="#" class="square" id="9_10" onclick="map(9, 10);"></a>
+					<a href="#" class="square" id="9_11" onclick="map(9, 11);"></a>
+					<a href="#" class="square" id="9_12" onclick="map(9, 12);"></a>
+					<a href="#" class="square" id="9_13" onclick="map(9, 13);"></a>
+					<a href="#" class="square" id="9_14" onclick="map(9, 14);"></a>
+					<a href="#" class="square" id="9_15" onclick="map(9, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="10_0" onclick="map(10, 0);"></a>
+					<a href="#" class="square" id="10_1" onclick="map(10, 1);"></a>
+					<a href="#" class="square" id="10_2" onclick="map(10, 2);"></a>
+					<a href="#" class="square" id="10_3" onclick="map(10, 3);"></a>
+					<a href="#" class="square" id="10_4" onclick="map(10, 4);"></a>
+					<a href="#" class="square" id="10_5" onclick="map(10, 5);"></a>
+					<a href="#" class="square" id="10_6" onclick="map(10, 6);"></a>
+					<a href="#" class="square" id="10_7" onclick="map(10, 7);"></a>
+					<a href="#" class="square" id="10_8" onclick="map(10, 8);"></a>
+					<a href="#" class="square" id="10_9" onclick="map(10, 9);"></a>
+					<a href="#" class="square" id="10_10" onclick="map(10, 10);"></a>
+					<a href="#" class="square" id="10_11" onclick="map(10, 11);"></a>
+					<a href="#" class="square" id="10_12" onclick="map(10, 12);"></a>
+					<a href="#" class="square" id="10_13" onclick="map(10, 13);"></a>
+					<a href="#" class="square" id="10_14" onclick="map(10, 14);"></a>
+					<a href="#" class="square" id="10_15" onclick="map(10, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="11_0" onclick="map(11, 0);"></a>
+					<a href="#" class="square" id="11_1" onclick="map(11, 1);"></a>
+					<a href="#" class="square" id="11_2" onclick="map(11, 2);"></a>
+					<a href="#" class="square" id="11_3" onclick="map(11, 3);"></a>
+					<a href="#" class="square" id="11_4" onclick="map(11, 4);"></a>
+					<a href="#" class="square" id="11_5" onclick="map(11, 5);"></a>
+					<a href="#" class="square" id="11_6" onclick="map(11, 6);"></a>
+					<a href="#" class="square" id="11_7" onclick="map(11, 7);"></a>
+					<a href="#" class="square" id="11_8" onclick="map(11, 8);"></a>
+					<a href="#" class="square" id="11_9" onclick="map(11, 9);"></a>
+					<a href="#" class="square" id="11_10" onclick="map(11, 10);"></a>
+					<a href="#" class="square" id="11_11" onclick="map(11, 11);"></a>
+					<a href="#" class="square" id="11_12" onclick="map(11, 12);"></a>
+					<a href="#" class="square" id="11_13" onclick="map(11, 13);"></a>
+					<a href="#" class="square" id="11_14" onclick="map(11, 14);"></a>
+					<a href="#" class="square" id="11_15" onclick="map(11, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="12_0" onclick="map(12, 0);"></a>
+					<a href="#" class="square" id="12_1" onclick="map(12, 1);"></a>
+					<a href="#" class="square" id="12_2" onclick="map(12, 2);"></a>
+					<a href="#" class="square" id="12_3" onclick="map(12, 3);"></a>
+					<a href="#" class="square" id="12_4" onclick="map(12, 4);"></a>
+					<a href="#" class="square" id="12_5" onclick="map(12, 5);"></a>
+					<a href="#" class="square" id="12_6" onclick="map(12, 6);"></a>
+					<a href="#" class="square" id="12_7" onclick="map(12, 7);"></a>
+					<a href="#" class="square" id="12_8" onclick="map(12, 8);"></a>
+					<a href="#" class="square" id="12_9" onclick="map(12, 9);"></a>
+					<a href="#" class="square" id="12_10" onclick="map(12, 10);"></a>
+					<a href="#" class="square" id="12_11" onclick="map(12, 11);"></a>
+					<a href="#" class="square" id="12_12" onclick="map(12, 12);"></a>
+					<a href="#" class="square" id="12_13" onclick="map(12, 13);"></a>
+					<a href="#" class="square" id="12_14" onclick="map(12, 14);"></a>
+					<a href="#" class="square" id="12_15" onclick="map(12, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="13_0" onclick="map(13, 0);"></a>
+					<a href="#" class="square" id="13_1" onclick="map(13, 1);"></a>
+					<a href="#" class="square" id="13_2" onclick="map(13, 2);"></a>
+					<a href="#" class="square" id="13_3" onclick="map(13, 3);"></a>
+					<a href="#" class="square" id="13_4" onclick="map(13, 4);"></a>
+					<a href="#" class="square" id="13_5" onclick="map(13, 5);"></a>
+					<a href="#" class="square" id="13_6" onclick="map(13, 6);"></a>
+					<a href="#" class="square" id="13_7" onclick="map(13, 7);"></a>
+					<a href="#" class="square" id="13_8" onclick="map(13, 8);"></a>
+					<a href="#" class="square" id="13_9" onclick="map(13, 9);"></a>
+					<a href="#" class="square" id="13_10" onclick="map(13, 10);"></a>
+					<a href="#" class="square" id="13_11" onclick="map(13, 11);"></a>
+					<a href="#" class="square" id="13_12" onclick="map(13, 12);"></a>
+					<a href="#" class="square" id="13_13" onclick="map(13, 13);"></a>
+					<a href="#" class="square" id="13_14" onclick="map(13, 14);"></a>
+					<a href="#" class="square" id="13_15" onclick="map(13, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="14_0" onclick="map(14, 0);"></a>
+					<a href="#" class="square" id="14_1" onclick="map(14, 1);"></a>
+					<a href="#" class="square" id="14_2" onclick="map(14, 2);"></a>
+					<a href="#" class="square" id="14_3" onclick="map(14, 3);"></a>
+					<a href="#" class="square" id="14_4" onclick="map(14, 4);"></a>
+					<a href="#" class="square" id="14_5" onclick="map(14, 5);"></a>
+					<a href="#" class="square" id="14_6" onclick="map(14, 6);"></a>
+					<a href="#" class="square" id="14_7" onclick="map(14, 7);"></a>
+					<a href="#" class="square" id="14_8" onclick="map(14, 8);"></a>
+					<a href="#" class="square" id="14_9" onclick="map(14, 9);"></a>
+					<a href="#" class="square" id="14_10" onclick="map(14, 10);"></a>
+					<a href="#" class="square" id="14_11" onclick="map(14, 11);"></a>
+					<a href="#" class="square" id="14_12" onclick="map(14, 12);"></a>
+					<a href="#" class="square" id="14_13" onclick="map(14, 13);"></a>
+					<a href="#" class="square" id="14_14" onclick="map(14, 14);"></a>
+					<a href="#" class="square" id="14_15" onclick="map(14, 15);"></a>
+				</div>
+				<div class= "column">
+					<a href="#" class="square" id="15_0" onclick="map(15, 0);"></a>
+					<a href="#" class="square" id="15_1" onclick="map(15, 1);"></a>
+					<a href="#" class="square" id="15_2" onclick="map(15, 2);"></a>
+					<a href="#" class="square" id="15_3" onclick="map(15, 3);"></a>
+					<a href="#" class="square" id="15_4" onclick="map(15, 4);"></a>
+					<a href="#" class="square" id="15_5" onclick="map(15, 5);"></a>
+					<a href="#" class="square" id="15_6" onclick="map(15, 6);"></a>
+					<a href="#" class="square" id="15_7" onclick="map(15, 7);"></a>
+					<a href="#" class="square" id="15_8" onclick="map(15, 8);"></a>
+					<a href="#" class="square" id="15_9" onclick="map(15, 9);"></a>
+					<a href="#" class="square" id="15_10" onclick="map(15, 10);"></a>
+					<a href="#" class="square" id="15_11" onclick="map(15, 11);"></a>
+					<a href="#" class="square" id="15_12" onclick="map(15, 12);"></a>
+					<a href="#" class="square" id="15_13" onclick="map(15, 13);"></a>
+					<a href="#" class="square" id="15_14" onclick="map(15, 14);"></a>
+					<a href="#" class="square" id="15_15" onclick="map(15, 15);"></a>
+				</div>
 		</div>
 		<div class = "log">
 			<p>log</p>
