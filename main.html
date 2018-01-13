@@ -9,131 +9,134 @@
 <body>
 <!-- Overhead title --> 
 <div class = "overhead">
-	<div class = "overheadLeft">
-	<!-- Possibly some cool bitgraphics of characters shooting lazors and stuff-->
+	<div class ="overheadLeft">
 	
 	</div>
-	<div class = "overheadMiddle">
+	<div class ="overheadMiddle">
 		<h1>Starsoft</h1>
 	</div>
-	<div class = "overheadRight">
+	<div class ="overheadRight">
 	
 	</div>
 </div>
 <!-- The game itself
-Left side: board and log, right side: characters
+Left side: board and log, middle:characters, right side: actions
 -->
-<div class = "board" >
-	<!-- the game board is 16 by 16 squares wide-->
-	<p>board</p>
-		<a href="#"
-				onclick="tick();">
-				<!-- Just a development button, ticks one forward-->
-				TICK</a> 
-				<br>
-			<p>Damage to character</p>
-			<br>
-		<input type="text" id="dmgTo" /> 
-		<br>
-			<p>Damage amount</p>
-		<input type="text" id="dmgAm" />
-		<br>
-		<a href="#"
-				onclick="damage();">
-				DAMAGE
-				</a>
+<div class="game">
+	<div class="leftside">
+		<div class = "board" >
+			<!-- the game board is 16 by 16 squares wide-->
+			<p>board</p>
+				<a href="#"onclick="tick();">
+					<!-- Just a development button, ticks one forward-->
+					TICK</a> 
+					<br>
+					<p>Damage to character</p>
+					<br>
+				<input type="text" id="dmgTo" /> 
+					<br>
+					<p>Damage amount</p>
+				<input type="text" id="dmgAm" />
+					<br>
+				<a href="#"onclick="damage();">
+						DAMAGE
+						</a>
+						
+		</div>
+		<div class = "log">
+			<p>log</p>
+			<!-- Log sends information. More is shown during the development stage.
+			In the end damage and movement will be shown here. -->
+			
+		</div>
+	</div>
+
+	<div class = "characters">
+		<!-- From here players see their characters and manage their actions.
+		Hp bar, inventory(?), weapons (picture with link to info??), specialities(?),
+		actions: shoot, use item(?), move, special ability(?), end turn button(!) -->
+		<div id ="ally0" >
+			<p class ="allyName">ally 0</p>
+			<p id ="allyHealth0">100/100</p>
+		</div>
+		<div id ="ally1" >
+			<p class ="allyName">ally 1</p>
+			<p id ="allyHealth1">100/100</p>
+		</div>
+		<div id ="ally2" >
+				<p class ="allyName">ally 2</p>
+				<p id ="allyHealth2">100/100</p>
+			</div>
+		<div id ="ally3" >
+			<p class ="allyName">ally 3</p>
+			<p id ="allyHealth3">100/100</p>
+		</div>
+		<div id ="ally4" >
+			<p class ="allyName">ally 4</p>
+			<p id ="allyHealth4">100/100</p>
+		</div>
+		<div id ="ally5" >
+			<p class ="allyName">ally 5</p>
+			<p id ="allyHealth5">100/100</p>
+		</div>
+		<div id ="ally6" >
+			<p class ="allyName">ally 6</p>
+			<p id ="allyHealth6">100/100</p>
+		</div>
+		<div id ="ally7" >
+				<p class ="allyName">ally 7</p>
+				<p id ="allyHealth7">100/100</p>
+			</div>
+	</div>
+		
+	<div class="action">
+		<p>Nappi</p>
+		<!-- Here is the action bar, each character has few actions to do.
+				Player clicks on the action button and then on the square he wants to interact with
+				-->
 				
-</div>
-<div class = "log">
-	<p>log</p>
-	<!-- Log sends information. More is shown during the development stage.
-	In the end damage and movement will be shown here. -->
-	
-</div>
-<div class = "characters">
-	<!-- From here players see their characters and manage their actions.
-	Hp bar, inventory(?), weapons (picture with link to info??), specialities(?),
-	actions: shoot, use item(?), move, special ability(?), end turn button(!) -->
-	<div id ="ally0" >
-		<p class ="allyName">ally 0</p>
-		<p id ="allyHealth0">100/100</p>
-	</div>
-	<div id ="ally1" >
-		<p class ="allyName">ally 1</p>
-		<p id ="allyHealth1">100/100</p>
-	</div>
-	<div id ="ally2" >
-		<p class ="allyName">ally 2</p>
-		<p id ="allyHealth2">100/100</p>
-	</div>
-	<div id ="ally3" >
-		<p class ="allyName">ally 3</p>
-		<p id ="allyHealth3">100/100</p>
-	</div>
-	<div id ="ally4" >
-		<p class ="allyName">ally 4</p>
-		<p id ="allyHealth4">100/100</p>
-	</div>
-	<div id ="ally5" >
-		<p class ="allyName">ally 5</p>
-		<p id ="allyHealth5">100/100</p>
-	</div>
-	<div id ="ally6" >
-		<p class ="allyName">ally 6</p>
-		<p id ="allyHealth6">100/100</p>
-	</div>
-	<div id ="ally7" >
-		<p class ="allyName">ally 7</p>
-		<p id ="allyHealth7">100/100</p>
-	</div>
-	
-	<!-- Here is the action bar, each character has few actions to do.
-		Player clicks on the action button and then on the square he wants to interact with
-		-->
-	<div class = "actionBar">
-		<div class = "actions0">
-		
+		<div class = "actionBar">
+			<div class = "actions0">
+			</div>
 		</div>
-	</div>
-	<div class = "actionBar">
-		<div class = "actions1">
-		
+		<div class = "actionBar">
+			<div class = "actions1">
+			
+			</div>
 		</div>
-	</div>
-	<div class = "actionBar">
-		<div class = "actions2">
-		
+		<div class = "actionBar">
+			<div class = "actions2">
+			
+			</div>
 		</div>
-	</div>
-	<div class = "actionBar">
-		<div class = "actions3">
-		
+		<div class = "actionBar">
+			<div class = "actions3">
+			
+			</div>
 		</div>
-	</div>
-	<div class = "actionBar">
-		<div class = "actions4">
-		
+		<div class = "actionBar">
+			<div class = "actions4">
+			
+			</div>
 		</div>
-	</div>
-	<div class = "actionBar">
-		<div class = "actions5">
-		
+		<div class = "actionBar">
+			<div class = "actions5">
+			
+			</div>
 		</div>
-	</div>
-	<div class = "actionBar">
-		<div class = "actions6">
-		
+		<div class = "actionBar">
+			<div class = "actions6">
+			
+			</div>
 		</div>
-	</div>
-	<div class = "actionBar">
-		<div class = "actions7">
-		
+		<div class = "actionBar">
+			<div class = "actions7">
+				
+			</div>
 		</div>
+			
 	</div>
-	
-</div>
 
-
-
+</div>
 </body>
 </html>
