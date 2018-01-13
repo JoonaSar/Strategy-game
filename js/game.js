@@ -41,16 +41,17 @@ var characters = {
 	}
 };
 // Function that runs through every time you start 
+
 var start = function(){
 	//Clears the alive-status of all characters
 	for (q = 0; q<24; q++){
 		characters.alive[q]= false;
 	};
 	//Brings a set number of allies to life and gives them a position
-	for (q = 0; q<characters.alliesAm; q++){
-		characters.alive[q] = true;
-		characters.positionx[q] = 0;
-		characters.positiony[q] = (2*q);
+	for (s = 0; s<characters.alliesAm; s++){
+		characters.alive[s] = true;
+		characters.positionx[s] = 0;
+		characters.positiony[s] = (2*s);
 	};
 	//Brings a set number of enemies to life and gives them a position
 	for (q = 0; q<characters.enemyAm; q++){
@@ -61,6 +62,7 @@ var start = function(){
 	tick();
 	characters.load();
 };
+
 // Variables to fix tick-function
 var tickHealth = null;
 var tickAlly = null;
@@ -84,25 +86,29 @@ var item = function(ThisNeedsAVariable){} ;
 
 var tick = function() {
 	//Ticks after every action to refresh items, health, alive and such
-	for (i = 0; i<24; i++) {
-		tickHealth = "allyHealth"+i;
-		tickAlly = "ally"+ i;
-		tickActionbar="actions"+i;
+	for (w = 0; w<24; w++) {
+		tickHealth = "allyHealth"+w;
+		tickAlly = "ally"+ w;
+		tickActionbar="actions"+w;
+		coordinates = characters.positionx[w] + "_" + characters.positiony[w];
+		if (!(characters.alive[w])){
+			document.getElementById(coordinates).style.backgroundImage = "";
+		}
 		//Caps health to 100
-		if (characters.health[i] >= 101) {
-			characters.health[i] = 100;
+		if (characters.health[w] >= 101) {
+			characters.health[w] = 100;
 		}
 		//Removes dead allies and their actionbars
-		if (characters.health[i] <= 0 ) {
-			characters.alive[i] = false;
-			if	(i <8) {
+		if ((characters.health[w] <= 0 || !(characters.alive[w]) )) {
+			characters.alive[w] = false;
+			if	(w <8) {
 				document.getElementById(tickAlly).style.display = "none";
 				document.getElementById(tickActionbar).style.display = "none";
 			}
 		}
 		//Updates allies health
-		if 	(i<8) {
-		document.getElementById(tickHealth).innerHTML = characters.health[i] +"/100";
+		if 	(w<8) {
+		document.getElementById(tickHealth).innerHTML = characters.health[w] +"/100";
 		}
 		}
 };
