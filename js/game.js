@@ -22,21 +22,24 @@ var characters = {
 // Variables to fix tick-function
 var tickHealth = null;
 var tickAlly = null;
+var tickActionbar = null;
 
 var tick = function() {
 	//Ticks after every action to refresh items, health, alive and such
 	for (i = 0; i<24; i++) {
-		tickHealth = "allyHealth"+ i;
+		tickHealth = "allyHealth"+i;
 		tickAlly = "ally"+ i;
+		tickActionbar="actions"+i;
 		//Caps health to 100
 		if (characters.health[i] >= 101) {
 			characters.health[i] = 100;
 		}
-		//Removes dead allies
+		//Removes dead allies and their actionbars
 		if (characters.health[i] <= 0 ) {
 			characters.alive[i] = false;
 			if	(i <8) {
 				document.getElementById(tickAlly).style.display = "none";
+				document.getElementById(tickActionbar).style.display = "none";
 			}
 		}
 		//Updates allies health
@@ -45,6 +48,7 @@ var tick = function() {
 		}
 		}
 };
+//Function to deal damage (or heal) a character
 var damageTo =null;
 var damageAmount =null;
 var damage = function(damageTo, damageAmount) {
