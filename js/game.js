@@ -40,8 +40,25 @@ var characters = {
 		}
 	}
 };
-// Function that runs through every time you start 
 
+//Function to manage the links in the map. 
+//board.add(x, y) adds the link to square in coordinates x,y
+//board.remove(x, y) removes the link from the square in coordinates x,y  
+var board = {
+	add: function (x, y) {
+		boardXY = x + "_" + y;
+		boardMap = "map(" + x + ", " + y + ");";
+		document.getElementById(boardXY).setAttribute("href", "#");
+		document.getElementById(boardXY).setAttribute("onclick",boardMap );
+	},
+	remove: function (x, y){
+		boardXY = x + "_" + y;
+		document.getElementById(boardXY).removeAttribute("href");
+		document.getElementById(boardXY).removeAttribute("onclick");
+	}
+}
+
+// Function that runs through every time you start 
 var start = function(){
 	//Clears the alive-status of all characters
 	for (q = 0; q<24; q++){
@@ -112,6 +129,7 @@ var tick = function() {
 		}
 		}
 };
+
 //Function to deal damage (or heal) a character
 var damageTo =null;
 var damageAmount =null;

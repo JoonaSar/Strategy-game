@@ -65,8 +65,8 @@
 					flex: 1 1 auto;
 					border: 1px black dotted;
 				}
-				.square:hover {
-					
+				.square:hover{
+					background-color:#7ecece;
 				}
 			
 		.log{
