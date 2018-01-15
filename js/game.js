@@ -9,8 +9,8 @@ var characters = {
 	health: [100,100,100,100,100,100,100,100,
 			 100,100,100,100,100,100,100,100,
 			 100,100,100,100,100,100,100,100],
-	alive:	[true,true,true,true,true,true,true,true,
-			 true,true,true,true,true,true,true,true,
+	alive:	[false,false,false,false,false,false,false,false,
+			 false,false,false,false,false,false,false,false,
 			 false,false,false,false,false,false,false,false],
 	enemyAm: 8,
 	alliesAm: 8,
@@ -19,11 +19,14 @@ var characters = {
 			 "rifle","rifle","rifle","rifle","rifle","rifle","rifle","rifle"],
 	items: null,
 	positionx:[0,0,0,0,0,0,0,0,
-			   15,15,15,15,15,15,15,15,
+			   0,0,0,0,0,0,0,0,
 			   0,0,0,0,0,0,0,0],
 	positiony:[0,2,4,6,8,10,12,14,
 			   0,2,4,6,8,10,12,14,
 			   0,0,0,0,0,0,0,0],
+	moveRange: [4,4,4,4,4,4,4,4,
+				4,4,4,4,4,4,4,4,
+				4,4,4,4,4,4,4,4],
 	abilities: [null],
 	//draws all characters
 	load: function(){
@@ -50,11 +53,13 @@ var board = {
 		boardMap = "map(" + x + ", " + y + ");";
 		document.getElementById(boardXY).setAttribute("href", "#");
 		document.getElementById(boardXY).setAttribute("onclick",boardMap );
+		document.getElementById(boardXY).style.border = "1px solid blue";
 	},
 	remove: function (x, y){
 		boardXY = x + "_" + y;
 		document.getElementById(boardXY).removeAttribute("href");
 		document.getElementById(boardXY).removeAttribute("onclick");
+		document.getElementById(boardXY).style.border = "null";
 	}
 }
 
@@ -89,23 +94,57 @@ var x = null;
 var y = null;
 var coordinates = null;
 //Outputs coordinates of the clicked square
+//Could act with a control parameter, say mapUse. All of the 
 var map = function(x, y){
 	//This function is only in test use right now, the rest should be ok
 	coordinates = x +"_" + y;
 	document.getElementById(coordinates).style.backgroundColor = "red";
-	
-	
 } ;
 //Functions to move character number whatever, to have it shoot, or to have it use an item
 moveChar = null;
 shootChar = null;
 itemChar = null;
-var move = function(moveChar){};
+//Enables all of the available squares
+var move = function(moveChar){
+	if (characters.alive[moveChar]){
+		k = null;
+		j = null;
+		for (k = 0; k<16; k++){
+			for (j=0; j <16; j++){
+				moveDistancex = Math.abs(characters.positionx[moveChar]- k);
+				moveDistancey = Math.abs(characters.positiony[moveChar]- j);
+				moveDistance = (moveDistancex + moveDistancey);
+				if (moveDistance<=characters.moveRange[moveChar]){
+						board.add(k,j);
+						}
+				for (h=0; h<24; h++){
+					if ((characters.alive[h] &&(characters.positionx[h]==k) && (characters.positiony[h]==j))){
+						board.remove(k,j);
+					}
+				}
+			}
+			
+		}
+	}
+	else {
+		window.alert("Error: dead men don't move #1")
+	};
+};
+/*Moves a character in itself
+	ok: function(moveChar){
+		if (characters.alive[moveChar]){
+			
+		}
+		else {
+			window.alert("Error: dead men don't move #2")
+		};
+	};
+*/
 var shoot = function(shootChar){};
 var item = function(itemChar){};
 
 var tick = function() {
-	//Ticks after every action to refresh items, health, alive and such
+	//Ticks after every action to refresh items, health, alive and board clickability
 	for (w = 0; w<24; w++) {
 		tickHealth = "allyHealth"+w;
 		tickAlly = "ally"+ w;
@@ -123,6 +162,12 @@ var tick = function() {
 				document.getElementById(tickActionbar).style.display = "none";
 			}
 		}
+		else {
+			if	(w <8) {
+				document.getElementById(tickAlly).style.display = "";
+				document.getElementById(tickActionbar).style.display = "";
+			}
+		}
 		if (!(characters.alive[w])){
 			document.getElementById(coordinates).style.backgroundImage = "";
 		}
@@ -131,6 +176,12 @@ var tick = function() {
 		document.getElementById(tickHealth).innerHTML = characters.health[w] +"/100";
 		}
 		}
+	//This part checks that there aren't any clickable squares left
+	for (k = 0; k<16; k++){
+		for (j=0; j <16; j++){
+			board.remove(k,j);
+		}
+	}
 };
 
 //Function to deal damage (or heal) a character
@@ -145,5 +196,3 @@ var damage = function(damageTo, damageAmount) {
 	
 	characters.health[damageTo] = characters.health[damageTo] - damageAmount;
 };
-
-

@@ -85,9 +85,16 @@
 			flex-flow:column;
 			background-color: #bbf7ee;
 		}
-			.allyName{
+			#allyName0,
+			#allyName1,
+			#allyName2,
+			#allyName3,
+			#allyName4,
+			#allyName5,
+			#allyName6,
+			#allyName7{
 				color:red;
-				font-size: 1em;
+				font-size: 1.2em;
 				text-align: center;
 			}
 
