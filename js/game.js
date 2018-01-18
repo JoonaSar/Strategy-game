@@ -6,9 +6,9 @@ var characters = {
 	names: ["Alice","Bob","Charlie","Dave","Elisa","Fiona","Gary","Henry",
 			"Enemy","Enemy","Enemy","Enemy","Enemy","Enemy","Enemy","Enemy",
 			"Enemy","Enemy","Enemy","Enemy","Enemy","Enemy","Enemy","Enemy"],
-	health: [100,100,100,100,100,100,100,100,
-			 100,100,100,100,100,100,100,100,
-			 100,100,100,100,100,100,100,100],
+	health: [null, null, null, null, null, null, null, null,
+			 null, null, null, null, null, null, null, null,
+			 null, null, null, null, null, null, null, null],
 	alive:	[false,false,false,false,false,false,false,false,
 			 false,false,false,false,false,false,false,false,
 			 false,false,false,false,false,false,false,false],
@@ -59,7 +59,12 @@ var board = {
 		boardMap = "map(" + x + ", " + y + ");";
 		document.getElementById(boardXY).setAttribute("href", "#");
 		document.getElementById(boardXY).setAttribute("onclick",boardMap );
-		document.getElementById(boardXY).style.border = "1px solid blue";
+		if (mapUse == 1){
+			document.getElementById(boardXY).style.border = "1px solid blue";
+		}
+		else if (mapUse == 2){
+			document.getElementById(boardXY).style.border = "1px solid red";
+		};
 	},
 	remove: function (x, y){
 		boardXY = x + "_" + y;
@@ -76,19 +81,20 @@ var start = function(){
 		characters.alive[q]= false;
 	};
 	//Brings a set number of allies to life and gives them a position
-	for (s = 0; s<characters.alliesAm; s++){
-		characters.alive[s] = true;
-		characters.positionx[s] = 0;
-		characters.positiony[s] = (2*s);
+	for (q = 0; q<characters.alliesAm; q++){
+		characters.alive[q] = true;
+		characters.health[q] = 100;
+		characters.positionx[q] = 0;
+		characters.positiony[q] = (2*q);
 	};
 	//Brings a set number of enemies to life and gives them a position
 	for (q = 0; q<characters.enemyAm; q++){
-		characters.alive[q+8] = true; 
+		characters.alive[q+8] = true;
+		characters.health[q+8] = 100;
 		characters.positionx[q+8] = 15;
 		characters.positiony[q+8] = (2*q);
 	};
 	tick();
-	characters.load();
 };
 
 // Variables to fix tick-function
@@ -99,9 +105,11 @@ var tickActionbar = null;
 var x = null;
 var y = null;
 var coordinates = null;
+
 //Outputs coordinates of the clicked square
 //Acts with a control parameter mapUse
 //mapUse: 0=free to choose an action, 1=move, 2=shoot 3=use item
+var mapUse = 0;
 var map = function(x, y){
 	//This function is only in test use right now, the rest should be ok
 	coordinates = x +"_" + y;
@@ -111,12 +119,12 @@ var map = function(x, y){
 var moveChar = null;
 var shootChar = null;
 var itemChar = null;
-var mapUse = 0;
+var shootButtonUsed = null;
 var moveButtonUsed = null;
 var cancelVar = null;
 //Enables all of the available squares
 var move = function(moveChar){
-	if (characters.alive[moveChar] && (mapUse==0)){
+	if (characters.alive[moveChar] && (mapUse==0) && !(characters.moved[moveChar])){
 		k = null;
 		j = null;
 		mapUse = 1;
@@ -145,39 +153,75 @@ var move = function(moveChar){
 	}
 	else {
 		if (!(characters.alive[moveChar])){
-			window.alert("Error: dead men don't move #1");
+			window.alert("Error: dead men don't move");
+		}
+		else if (mapUse!=0){
+			window.alert("Cancel your action before choosing a new one!")
+		}
+		else if (characters.moved[moveChar]){
+			window.alert("That character has already moved!")
+		}
+	};
+};
+var shoot = function(shootChar){
+	if (characters.alive[shootChar] && (mapUse==0)){
+		k = null;
+		j = null;
+		mapUse = 2;
+		//Transforms the used button to a cancel-button (tick-function)
+		shootButtonUsed = "shootButton" + shootChar;
+		cancelVar = shootChar;
+		document.getElementById(shootButtonUsed).setAttribute("onclick", "tick();");
+		document.getElementById(shootButtonUsed).style.backgroundColor = "#632323";
+		document.getElementById(shootButtonUsed).innerHTML = "Cancel";
+		for (k = 0; k<16; k++){
+			for (j=0; j <16; j++){
+				moveDistancex = Math.abs(characters.positionx[shootChar]- k);
+				moveDistancey = Math.abs(characters.positiony[shootChar]- j);
+				moveDistance = (moveDistancex + moveDistancey);
+				if (moveDistance<=characters.moveRange[shootChar]){
+						board.add(k,j);
+						}
+				for (h=0; h<24; h++){
+					if ((characters.alive[h] &&(characters.positionx[h]==k) && (characters.positiony[h]==j))){
+						board.remove(k,j);
+					}
+				}
+			}
+			
+		}
+	}
+	else {
+		if (!(characters.alive[shootChar])){
+			window.alert("Error: dead men don't shoot");
 		}
 		else {
 			window.alert("Cancel your action before choosing a new one!")
 		}
 	};
 };
-/*Moves a character in itself
-	ok: function(moveChar){
-		if (characters.alive[moveChar]){
-			
-		}
-		else {
-			window.alert("Error: dead men don't move #2")
-		};
-	};
-*/
-var shoot = function(shootChar){};
 var item = function(itemChar){};
 var tick = function() {
-	//Ticks after every action to refresh items, health, alive and board clickability
+	//Ticks after every action to refresh variables, items, health, alive and board clickability
 	for (w = 0; w<24; w++) {
 		tickHealth = "allyHealth"+w;
 		tickAlly = "ally"+ w;
 		tickActionbar="actions"+w;
 		coordinates = characters.positionx[w] + "_" + characters.positiony[w];
 		//Caps health to 100
-		if (characters.health[w] >= 101) {
+		if (characters.health[w] > 100) {
 			characters.health[w] = 100;
 		}
-		//Removes dead allies' actionbars
-		if ((characters.health[w] <= 0 || !(characters.alive[w]) )) {
+		//Kills characters that are below 1 health, then removes them from the game
+		if ((characters.health[w] <1) && !(characters.health[w] == null)){
 			characters.alive[w] = false;
+			characters.positionx[w] = null;
+			characters.positiony[w] = null;
+			characters.health[w] = null;
+			document.getElementById(coordinates).style.backgroundImage = null;
+		}
+		//Removes dead allies' actionbars
+		if ((!(characters.alive[w]) )) {
 			if	(w <8) {
 				document.getElementById(tickAlly).style.display = "none";
 				document.getElementById(tickActionbar).style.display = "none";
@@ -189,15 +233,12 @@ var tick = function() {
 				document.getElementById(tickActionbar).style.display = "";
 			}
 		}
-		//Removes dead characters
-		if (!(characters.alive[w])){
-			
-		}
 		//Updates allies health
 		if 	(w<8) {
 		document.getElementById(tickHealth).innerHTML = characters.health[w] +"/100";
 		}
-		}
+		};
+	characters.load();
 	//This part checks that there aren't any clickable squares left
 	for (k = 0; k<16; k++){
 		for (j=0; j <16; j++){
@@ -210,6 +251,12 @@ var tick = function() {
 		cancelVar = "move(" + cancelVar +");";
 		document.getElementById(moveButtonUsed).setAttribute("onclick",cancelVar);
 		document.getElementById(moveButtonUsed).innerHTML = "Move";
+	};
+	if (mapUse == 2){
+		document.getElementById(shootButtonUsed).style.backgroundColor = null;
+		cancelVar = "shoot(" + cancelVar +");";
+		document.getElementById(shootButtonUsed).setAttribute("onclick",cancelVar);
+		document.getElementById(shootButtonUsed).innerHTML = "Shoot";
 	};
 	//Clears the mapUse, so that new commands can be given
 	mapUse = 0; 
