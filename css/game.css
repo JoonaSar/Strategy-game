@@ -19,7 +19,7 @@
 		font-family: monospace;
 		text-transform: capitalize;
 		text-align: center;
-		
+
 	}
 	.overheadMiddle{
 		background-color: grey;
@@ -68,7 +68,7 @@
 				.square:hover{
 					background-color:#7ecece;
 				}
-			
+
 		.log{
 			flex:1 1 auto;
 			background-color: #e8ada7;
@@ -97,16 +97,30 @@
 				font-size: 1.2em;
 				text-align: center;
 			}
-
+			#allyHealth0,
+			#allyHealth1,
+			#allyHealth2,
+			#allyHealth3,
+			#allyHealth4,
+			#allyHealth5,
+			#allyHealth6,
+			#allyHealth7{
+				color:white;
+				text-align: center;
+				width: 100%;
+				background-color:red;
+				transition: width 2s;
+			}
 			.ally{
 				border-width: 2px;
 				border-style: solid;
 				border-top-style:none;
 				border-color: black;
 				border-right-style: none;
+				padding: 3px;
 				flex:1 1 auto;
 			}
-			
+
 		.action{
 			flex: 1 3 auto;
 			background-color:#91b0e2;
@@ -125,7 +139,7 @@
 					border: 1px dashed black;
 					color: white;
 				}
-				
+
 				.moveButton{
 					background-color: #5abefc;
 				}

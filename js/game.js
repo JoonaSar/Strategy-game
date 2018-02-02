@@ -248,6 +248,7 @@ var tick = function() {
 		//Updates allies health
 		if 	(w<8) {
 		document.getElementById(tickHealth).innerHTML = characters.health[w] +"/100";
+		document.getElementById(tickHealth).style.width = characters.health[w] +"%";
 		}
 		};
 	//This redraws the characters
