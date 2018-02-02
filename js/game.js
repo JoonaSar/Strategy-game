@@ -34,8 +34,14 @@ var characters = {
 				4,4,4,4,4,4,4,4,
 				4,4,4,4,4,4,4,4],
 	abilities: [null],
-	//draws all characters
+	//Clears the characters, then draws all of the alive ones
 	load: function(){
+		for (k = 0; k<16; k++){
+			for (j=0; j <16; j++){
+				coordinates = k + "_" + j;
+				document.getElementById(coordinates).style.backgroundImage = null;
+			}
+		};
 		for (i = 0; i<24; i++){
 			if(characters.alive[i]){
 				coordinates = characters.positionx[i] + "_" + characters.positiony[i];
@@ -50,9 +56,9 @@ var characters = {
 	}
 };
 
-//Function to manage the links in the map. 
+//Function to manage the links in the map.
 //board.add(x, y) adds the link to square in coordinates x,y
-//board.remove(x, y) removes the link from the square in coordinates x,y  
+//board.remove(x, y) removes the link from the square in coordinates x,y
 var board = {
 	add: function (x, y) {
 		boardXY = x + "_" + y;
@@ -74,7 +80,7 @@ var board = {
 	}
 }
 
-// Function that runs through every time you start 
+// Function that runs through every time you start
 var start = function(){
 	//Clears the alive-status of all characters
 	for (q = 0; q<24; q++){
@@ -114,6 +120,12 @@ var map = function(x, y){
 	//This function is only in test use right now, the rest should be ok
 	coordinates = x +"_" + y;
 	document.getElementById(coordinates).style.backgroundColor = "red";
+	if (mapUse == 1){
+		characters.positionx[cancelVar] = x ;
+		characters.positiony[cancelVar] = y ;
+		characters.moved[cancelVar] = true;
+		tick();
+	}
 } ;
 //Functions to move character number whatever, to have it shoot, or to have it use an item
 var moveChar = null;
@@ -148,7 +160,7 @@ var move = function(moveChar){
 					}
 				}
 			}
-			
+
 		}
 	}
 	else {
@@ -188,7 +200,7 @@ var shoot = function(shootChar){
 					}
 				}
 			}
-			
+
 		}
 	}
 	else {
@@ -238,6 +250,7 @@ var tick = function() {
 		document.getElementById(tickHealth).innerHTML = characters.health[w] +"/100";
 		}
 		};
+	//This redraws the characters
 	characters.load();
 	//This part checks that there aren't any clickable squares left
 	for (k = 0; k<16; k++){
@@ -259,7 +272,7 @@ var tick = function() {
 		document.getElementById(shootButtonUsed).innerHTML = "Shoot";
 	};
 	//Clears the mapUse, so that new commands can be given
-	mapUse = 0; 
+	mapUse = 0;
 };
 
 //Function to deal damage (or heal) a character
@@ -271,6 +284,6 @@ var damage = function(damageTo, damageAmount) {
 	damageAmount = document.getElementById("dmgAm").value;
 	damageAmount = document.getElementById("dmgAm").value;
 	//This line is for testing only
-	
+
 	characters.health[damageTo] = characters.health[damageTo] - damageAmount;
 };
