@@ -100,20 +100,69 @@ var start = function(){
 		characters.positionx[q+8] = 15;
 		characters.positiony[q+8] = (2*q);
 	};
+	turn.player = true;
 	tick();
 };
 
 //Variables and functions to manage turns
-var turn {
+var turn = {
 	//true=players turn, false=AI's turn
-	player: true;
+	player: true,
 	end: function(){
 		turn.player = false;
-	};
+		document.getElementById("endTurnButton").removeAttribute("href");
+		document.getElementById("endTurnButton").removeAttribute("onclick")
+		document.getElementById("endTurnButton").innerHTML ="AI's turn"
+		},
 	endAI: function(){
 		turn.player = true;
-	};
+		document.getElementById("endTurnButton").setAttribute("href", "#");
+		document.getElementById("endTurnButton").removeAttribute("onclick", "turn.end()")
+		document.getElementById("endTurnButton").innerHTML ="END TURN"
+	}
 };
+//Executes the AI's turn
+var ai = {
+	//Group for all of valuated tiles
+	moveValue: {
+		tile: [],
+		value: []
+	},
+	coordinates: [],
+	//Valuates all tiles on how likely to move there
+	valuate: function(moveChar){
+		ai.moveValue.tile=[null];
+		ai.moveValue.value=[null];
+
+		for (s=0;s<24;s++){
+			ai.coordinates.push(characters.positionx[s]+"_"+characters.positiony[s]);
+		};
+		for (k=0; k<16; k++){
+			for (j=0; j <16; j++){
+				moveDistancex=Math.abs(characters.positionx[moveChar]- k);
+				moveDistancey=Math.abs(characters.positiony[moveChar]- j);
+				coordinates=k+"_"+j;
+				moveDistance=(moveDistancex+moveDistancey);
+				if ((moveDistance<=characters.moveRange[moveChar])&&!(ai.coordinates.includes(coordinates))){
+					ai.moveValue.tile.push(+k+'_'+j);
+					//Code to actually evaluate tiles
+					ai.moveValue.value.push(Math.random());
+				};
+			};
+		};
+		ai.moveValue.tile.splice(0,1);
+		ai.moveValue.value.splice(0,1);
+	},
+	move: function(){
+		for (aiChar=8; aiChar<24; aiChar++) {
+			if (characers.alive[aiChar]){
+
+			};
+		};
+	},
+
+};
+
 
 // Variables to fix tick-function
 var tickHealth = null;
@@ -244,11 +293,14 @@ var tick = function() {
 			characters.health[w] = null;
 			document.getElementById(coordinates).style.backgroundImage = null;
 		}
-		//Removes dead allies' actionbars
+		//Removes or grays out dead allies' actionbars
 		if ((!(characters.alive[w]) )) {
 			if	(w <8) {
 				document.getElementById(tickAlly).style.display = "none";
 				document.getElementById(tickActionbar).style.display = "none";
+				//document.getElementById(tickAlly).style.backgroundColor = "gray";
+				//document.getElementById(tickActionbar).innerHTML = "Dead";
+				//document.getElementById(tickHealth).innerHTML = "Dead";
 			}
 		}
 		else {
