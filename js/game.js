@@ -103,6 +103,18 @@ var start = function(){
 	tick();
 };
 
+//Variables and functions to manage turns
+var turn {
+	//true=players turn, false=AI's turn
+	player: true;
+	end: function(){
+		turn.player = false;
+	};
+	endAI: function(){
+		turn.player = true;
+	};
+};
+
 // Variables to fix tick-function
 var tickHealth = null;
 var tickAlly = null;
@@ -250,7 +262,7 @@ var tick = function() {
 		document.getElementById(tickHealth).innerHTML = characters.health[w] +"/100";
 		document.getElementById(tickHealth).style.width = characters.health[w] +"%";
 		}
-		};
+	};
 	//This redraws the characters
 	characters.load();
 	//This part checks that there aren't any clickable squares left
@@ -280,11 +292,9 @@ var tick = function() {
 var damageTo =null;
 var damageAmount =null;
 var damage = function(damageTo, damageAmount) {
-	//This line is for testing only
+	//These lines are for testing only
 	damageTo = document.getElementById("dmgTo").value;
 	damageAmount = document.getElementById("dmgAm").value;
 	damageAmount = document.getElementById("dmgAm").value;
-	//This line is for testing only
-
 	characters.health[damageTo] = characters.health[damageTo] - damageAmount;
 };

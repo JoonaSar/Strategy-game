@@ -8,16 +8,21 @@
 	<meta name="author" content="Joona Särkijärvi">
 </head>
 <body>
-<!-- Overhead title --> 
+<!-- Overhead title -->
 <div class = "overhead">
-	<a class ="overheadLeft" href="#" onclick="start();">
-		RESTART
-	</a>
+	<div class ="overheadLeft">
+		<a id="restartButton" href="#" onclick="start();">
+			RESTART
+		</a>
+		<a id="endTurnButton" href="#" onclick="turn.end();">
+			END TURN
+		</a>
+	</div>
 	<div class ="overheadMiddle">
 		<h1>Starsoft</h1>
 	</div>
 	<div class ="overheadRight">
-	
+
 	</div>
 </div>
 <!-- The game itself
@@ -323,11 +328,11 @@ Left side: board and log, middle:characters, right side: actions
 			In the end damage and movement will be shown here. -->
 			<a href="#"onclick="tick();">
 					<!-- Just a development button, ticks one forward-->
-					TICK</a> 
+					TICK</a>
 					<br>
 					<p>Damage to character</p>
 					<br>
-				<input type="text" id="dmgTo" /> 
+				<input type="text" id="dmgTo" />
 					<br>
 					<p>Damage amount</p>
 				<input type="text" id="dmgAm" />
@@ -364,7 +369,7 @@ Left side: board and log, middle:characters, right side: actions
 			</div>
 			<div class="ally" id ="ally5" >
 				<p id ="allyName5">ally 5</p>
-				<p id ="allyHealth5">100/100</p> 
+				<p id ="allyHealth5">100/100</p>
 			</div>
 			<div class="ally" id ="ally6" >
 				<p id ="allyName6">ally 6</p>
@@ -372,15 +377,15 @@ Left side: board and log, middle:characters, right side: actions
 			</div>
 			<div class="ally" id ="ally7" >
 				<p id ="allyName7">ally 7</p>
-				<p id ="allyHealth7">100/100</p> 
+				<p id ="allyHealth7">100/100</p>
 			</div>
 		</div>
-			
+
 		<div class="action">
 			<!-- Here is the action bar, each character has few actions to do.
 					Player clicks on the action button and then on the square he wants to interact with
 					-->
-					
+
 			<div class = "actionBar" id ="actions0">
 				<a class="moveButton"id="moveButton0" href="#" onclick="move(0);">
 					Move
@@ -469,13 +474,13 @@ Left side: board and log, middle:characters, right side: actions
 					Use item
 				</a>
 			</div>
-				
+
 		</div>
 	</div>
 </div>
 <div class="credits">
 	2018
-	
+
 </div>
 </body>
 </html>
