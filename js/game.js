@@ -64,9 +64,23 @@ var board = {
 	elementsText: "",
 	elements: "",
 	//Coordinates of water
-	water: ["0_1", "1_1", "0_0"],
+	water: ["2_0","3_0","4_0","5_0","6_0","7_0",
+					"3_1","4_1","5_1","6_1","7_1","8_1",
+					"4_2","5_2","6_2","7_2","8_2",
+					"5_3","6_3","7_3","8_3",
+					"6_4","7_4","8_4","9_4",
+					"6_5","7_5","8_5","9_5",
+					"6_6","7_6","8_6","9_6",
+					"6_7","7_7","8_7","9_7",
+					"5_8","6_8","7_8","8_8",
+					"4_11","5_11","6_11","7_11","8_11",
+					"5_12","6_12","7_12","8_12",
+					"5_13","6_13","7_13","8_13","9_13",
+					"5_14","6_14","7_14","8_14","9_14",
+					"5_15","6_15","7_15","8_15"],
 	//Coordinates of bridges
-	bridges: ["0_2", "0_3"],
+	bridges: ["4_9","5_9","6_9","7_9",
+						"4_10","5_10","6_10","7_10"],
 	//Coordinates of boulders
 	boulders: ["0_4"],
 	//Coordinates of rocks
@@ -77,30 +91,39 @@ var board = {
 		this.elementsText = "[";
 		for (q=0;q<16;q++){
 			for (w=0;w<16;w++){
-				this.elementsText = this.elementsText+'{"boardCoordinates":"'+q+'_'+w+'",';
+				this.elementsText = this.elementsText+'{"boardCoordinates":"'+w+'_'+q+'",';
 				//Fills in water
-				if (this.water.includes(q+"_"+w)){
+				if (this.water.includes(w+"_"+q)){
 					this.elementsText = this.elementsText+'"elements":"water"';
+					document.getElementById(w+"_"+q).style.backgroundColor = "#3399ff";
+					//document.getElementById(q+"_"+w).style.backgroundImage = "url('img/water.png')"
 				}
 				//Fills in bridges etc.
-				else if (this.bridges.includes(q+"_"+w)){
+				else if (this.bridges.includes(w+"_"+q)){
 					this.elementsText = this.elementsText+'"elements":"bridge"';
+					document.getElementById(w+"_"+q).style.backgroundColor = " #604020";
+					//document.getElementById(q+"_"+w).style.backgroundImage = "url('img/water.png')"
 				}
 				//Fills the rest with grass (for now)
 				else{
 					this.elementsText = this.elementsText+'"elements":"grass"';
+					document.getElementById(w+"_"+q).style.backgroundColor = "#618a0f";
+					//document.getElementById(q+"_"+w).style.backgroundImage = "url('img/water.png')"
 				};
 				//Fills in boulders
-				if (this.boulders.includes(q+"_"+w)){
+				if (this.boulders.includes(w+"_"+q)){
 					this.elementsText = this.elementsText+',"obstacles":"boulder"';
+					//document.getElementById(q+"_"+w).style.backgroundImage = "url('img/water.png')"
 				};
 				//Fills in rocks
-				if (this.rocks.includes(q+"_"+w)){
+				if (this.rocks.includes(w+"_"+q)){
 					this.elementsText = this.elementsText+',"obstacles":"rock"';
+					//document.getElementById(q+"_"+w).style.backgroundImage = "url('img/water.png')"
 				};
 				//Fills in trees
-				if (this.trees.includes(q+"_"+w)){
+				if (this.trees.includes(w+"_"+q)){
 					this.elementsText = this.elementsText+',"obstacles":"tree"';
+					//document.getElementById(q+"_"+w).style.backgroundImage = "url('img/water.png')"
 				};
 				this.elementsText = this.elementsText+'},'
 			};
@@ -150,6 +173,7 @@ var start = function(){
 		characters.positiony[q+8] = (2*q);
 	};
 	turn.player = true;
+	board.create();
 	tick();
 };
 
