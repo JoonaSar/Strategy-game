@@ -184,14 +184,23 @@ var turn = {
 	end: function(){
 		turn.player = false;
 		document.getElementById("endTurnButton").removeAttribute("href");
-		document.getElementById("endTurnButton").removeAttribute("onclick")
-		document.getElementById("endTurnButton").innerHTML ="AI's turn"
+		document.getElementById("endTurnButton").removeAttribute("onclick");
+		document.getElementById("endTurnButton").innerHTML ="AI's turn";
+		for (i=8;i<24;i++){
+			characters.shot=false;
+			characters.moved=false;
+		};
 		},
 	endAI: function(){
 		turn.player = true;
 		document.getElementById("endTurnButton").setAttribute("href", "#");
-		document.getElementById("endTurnButton").removeAttribute("onclick", "turn.end()")
-		document.getElementById("endTurnButton").innerHTML ="END TURN"
+		document.getElementById("endTurnButton").removeAttribute("onclick", "turn.end()");
+		document.getElementById("endTurnButton").innerHTML ="END TURN";
+		//Resets characters shot and moved values
+		for (i=0;i<8;i++){
+			characters.shot=false;
+			characters.moved=false;
+		};
 	}
 };
 //Executes the AI's turn
