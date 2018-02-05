@@ -56,10 +56,59 @@ var characters = {
 	}
 };
 
-//Function to manage the links in the map.
+//Function to manage the links in the map and the map itself
 //board.add(x, y) adds the link to square in coordinates x,y
 //board.remove(x, y) removes the link from the square in coordinates x,y
+//board.create() creates the map according to the elements listed below
 var board = {
+	elementsText: "",
+	elements: "",
+	//Coordinates of water
+	water: ["0_1", "1_1", "0_0"],
+	//Coordinates of bridges
+	bridges: ["0_2", "0_3"],
+	//Coordinates of boulders
+	boulders: ["0_4"],
+	//Coordinates of rocks
+	rocks: ["0_5"],
+	//Coordinates of trees
+	trees:["0_6"],
+	create: function (){
+		this.elementsText = "[";
+		for (q=0;q<16;q++){
+			for (w=0;w<16;w++){
+				this.elementsText = this.elementsText+'{"boardCoordinates":"'+q+'_'+w+'",';
+				//Fills in water
+				if (this.water.includes(q+"_"+w)){
+					this.elementsText = this.elementsText+'"elements":"water"';
+				}
+				//Fills in bridges etc.
+				else if (this.bridges.includes(q+"_"+w)){
+					this.elementsText = this.elementsText+'"elements":"bridge"';
+				}
+				//Fills the rest with grass (for now)
+				else{
+					this.elementsText = this.elementsText+'"elements":"grass"';
+				};
+				//Fills in boulders
+				if (this.boulders.includes(q+"_"+w)){
+					this.elementsText = this.elementsText+',"obstacles":"boulder"';
+				};
+				//Fills in rocks
+				if (this.rocks.includes(q+"_"+w)){
+					this.elementsText = this.elementsText+',"obstacles":"rock"';
+				};
+				//Fills in trees
+				if (this.trees.includes(q+"_"+w)){
+					this.elementsText = this.elementsText+',"obstacles":"tree"';
+				};
+				this.elementsText = this.elementsText+'},'
+			};
+		};
+		this.elementsText = this.elementsText.slice(0,(this.elementsText.length-1));
+		this.elementsText = this.elementsText + ']';
+		this.elements = JSON.parse(this.elementsText);
+	},
 	add: function (x, y) {
 		boardXY = x + "_" + y;
 		boardMap = "map(" + x + ", " + y + ");";
