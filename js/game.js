@@ -24,10 +24,7 @@ var characters = {
 			 "rifle","rifle","rifle","rifle","rifle","rifle","rifle","rifle",
 			 "rifle","rifle","rifle","rifle","rifle","rifle","rifle","rifle"],
 	items: null,
-	positionx:[null, null, null, null, null, null, null, null,
-			   null, null, null, null, null, null, null, null,
-			   null, null, null, null, null, null, null, null],
-	positiony:[null, null, null, null, null, null, null, null,
+	position:[null, null, null, null, null, null, null, null,
 			   null, null, null, null, null, null, null, null,
 			   null, null, null, null, null, null, null, null],
 	moveRange: [4,4,4,4,4,4,4,4,
@@ -44,12 +41,11 @@ var characters = {
 		};
 		for (i = 0; i<24; i++){
 			if(characters.alive[i]){
-				coordinates = characters.positionx[i] + "_" + characters.positiony[i];
 				if (i<8){
-					document.getElementById(coordinates).style.backgroundImage = "url('img/ally.png')";
+					document.getElementById(characters.position[i]).style.backgroundImage = "url('img/ally.png')";
 				}
 				else {
-					document.getElementById(coordinates).style.backgroundImage = "url('img/enemy.png')";
+					document.getElementById(characters.position[i]).style.backgroundImage = "url('img/enemy.png')";
 				}
 			}
 		}
@@ -162,15 +158,13 @@ var start = function(){
 	for (q = 0; q<characters.alliesAm; q++){
 		characters.alive[q] = true;
 		characters.health[q] = 100;
-		characters.positionx[q] = 0;
-		characters.positiony[q] = (2*q);
+		characters.position[q] = "0"+"_"+2*q;
 	};
 	//Brings a set number of enemies to life and gives them a position
 	for (q = 0; q<characters.enemyAm; q++){
 		characters.alive[q+8] = true;
 		characters.health[q+8] = 100;
-		characters.positionx[q+8] = 15;
-		characters.positiony[q+8] = (2*q);
+		characters.position[q+8] = "15"+"_"+2*q;
 	};
 	turn.player = true;
 	board.create();
@@ -205,35 +199,9 @@ var turn = {
 };
 //Executes the AI's turn
 var ai = {
-	//Group for all of valuated tiles
-	moveValue: {
-		tile: [],
-		value: []
-	},
-	coordinates: [],
 	//Valuates all tiles on how likely to move there
 	valuate: function(moveChar){
-		ai.moveValue.tile=[null];
-		ai.moveValue.value=[null];
 
-		for (s=0;s<24;s++){
-			ai.coordinates.push(characters.positionx[s]+"_"+characters.positiony[s]);
-		};
-		for (k=0; k<16; k++){
-			for (j=0; j <16; j++){
-				moveDistancex=Math.abs(characters.positionx[moveChar]- k);
-				moveDistancey=Math.abs(characters.positiony[moveChar]- j);
-				coordinates=k+"_"+j;
-				moveDistance=(moveDistancex+moveDistancey);
-				if ((moveDistance<=characters.moveRange[moveChar])&&!(ai.coordinates.includes(coordinates))){
-					ai.moveValue.tile.push(+k+'_'+j);
-					//Code to actually evaluate tiles
-					ai.moveValue.value.push(Math.random());
-				};
-			};
-		};
-		ai.moveValue.tile.splice(0,1);
-		ai.moveValue.value.splice(0,1);
 	},
 	move: function(){
 		for (aiChar=8; aiChar<24; aiChar++) {
@@ -264,8 +232,7 @@ var map = function(x, y){
 	coordinates = x +"_" + y;
 	document.getElementById(coordinates).style.backgroundColor = "red";
 	if (mapUse == 1){
-		characters.positionx[cancelVar] = x ;
-		characters.positiony[cancelVar] = y ;
+		characters.position[cancelVar] = x+"_"+y ;
 		characters.moved[cancelVar] = true;
 		tick();
 	}
@@ -289,21 +256,19 @@ var move = function(moveChar){
 		document.getElementById(moveButtonUsed).setAttribute("onclick", "tick();");
 		document.getElementById(moveButtonUsed).style.backgroundColor = "#244C64";
 		document.getElementById(moveButtonUsed).innerHTML = "Cancel";
-		for (k = 0; k<16; k++){
+		for (k=0; k<16; k++){
 			for (j=0; j <16; j++){
-				moveDistancex = Math.abs(characters.positionx[moveChar]- k);
-				moveDistancey = Math.abs(characters.positiony[moveChar]- j);
-				moveDistance = (moveDistancex + moveDistancey);
-				if (moveDistance<=characters.moveRange[moveChar]){
-						board.add(k,j);
-						}
-				for (h=0; h<24; h++){
-					if ((characters.alive[h] &&(characters.positionx[h]==k) && (characters.positiony[h]==j))){
-						board.remove(k,j);
+				coordinates=k+"_"+j;
+				if (!(characters.position.includes(coordinates))){
+					stop = characters.position[moveChar].indexOf("_");
+					moveDistancex = Math.abs(characters.position[moveChar].slice(0, stop) - k);
+					moveDistancey = Math.abs(characters.position[moveChar].slice(stop+1)- j);
+					moveDistance = (moveDistancex + moveDistancey);
+					if (moveDistance<=characters.moveRange[moveChar]){
+							board.add(k,j);
 					}
 				}
 			}
-
 		}
 	}
 	else {
@@ -331,15 +296,15 @@ var shoot = function(shootChar){
 		document.getElementById(shootButtonUsed).innerHTML = "Cancel";
 		for (k = 0; k<16; k++){
 			for (j=0; j <16; j++){
-				moveDistancex = Math.abs(characters.positionx[shootChar]- k);
-				moveDistancey = Math.abs(characters.positiony[shootChar]- j);
+				moveDistancex = Math.abs(characters.position[shootChar].slice(0, stop) - k);
+				moveDistancey = Math.abs(characters.position[shootChar].slice(stop+1)- j);
 				moveDistance = (moveDistancex + moveDistancey);
 				if (moveDistance<=characters.moveRange[shootChar]){
 						board.add(k,j);
 						}
-				for (h=0; h<24; h++){
-					if ((characters.alive[h] &&(characters.positionx[h]==k) && (characters.positiony[h]==j))){
-						board.remove(k,j);
+				for (h=0; h<characters.alliesAm.length; h++){
+					if (characters.alive[h]){
+						board.remove(characters.position[h]);
 					}
 				}
 			}
@@ -362,7 +327,6 @@ var tick = function() {
 		tickHealth = "allyHealth"+w;
 		tickAlly = "ally"+ w;
 		tickActionbar="actions"+w;
-		coordinates = characters.positionx[w] + "_" + characters.positiony[w];
 		//Caps health to 100
 		if (characters.health[w] > 100) {
 			characters.health[w] = 100;
@@ -370,10 +334,9 @@ var tick = function() {
 		//Kills characters that are below 1 health, then removes them from the game
 		if ((characters.health[w] <1) && !(characters.health[w] == null)){
 			characters.alive[w] = false;
-			characters.positionx[w] = null;
-			characters.positiony[w] = null;
+			characters.position[w] = null;
 			characters.health[w] = null;
-			document.getElementById(coordinates).style.backgroundImage = null;
+			document.getElementById(characters.position[w]).style.backgroundImage = null;
 		}
 		//Removes or grays out dead allies' actionbars
 		if ((!(characters.alive[w]) )) {
