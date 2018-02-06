@@ -84,10 +84,10 @@ var board = {
 	//Coordinates of trees
 	trees:["0_6"],
 	create: function (){
-		this.elementsText = "[";
+		this.elementsText = "{";
 		for (q=0;q<16;q++){
 			for (w=0;w<16;w++){
-				this.elementsText = this.elementsText+'{"boardCoordinates":"'+w+'_'+q+'",';
+				this.elementsText = this.elementsText+'"'+w+'_'+q+'":{';
 				//Fills in water
 				if (this.water.includes(w+"_"+q)){
 					this.elementsText = this.elementsText+'"elements":"water"';
@@ -125,7 +125,7 @@ var board = {
 			};
 		};
 		this.elementsText = this.elementsText.slice(0,(this.elementsText.length-1));
-		this.elementsText = this.elementsText + ']';
+		this.elementsText = this.elementsText + '}';
 		this.elements = JSON.parse(this.elementsText);
 	},
 	add: function (x, y) {
@@ -199,9 +199,23 @@ var turn = {
 };
 //Executes the AI's turn
 var ai = {
+	//AI values for each tile
+	tiles:[],
 	//Valuates all tiles on how likely to move there
-	valuate: function(moveChar){
-
+	valuate: function(char){
+		for (q=0;q<16;q++){
+			for (w=0;w<16;w++){
+				coordinates=q+"_"+w;
+				//Doesn't valuate tiles with people or obstacles or water in them
+				if (!((characters.position.includes(coordinates))||(!(board.elements[coordinates].obstacles===undefined))||(board.elements[coordinates].elements=="water"))){
+					this.tiles.push(Math.random());
+				}
+				//Those unpassable tiles get a value of 0 for now (some characters could hover on water = valuate them here)
+				else {
+					this.tiles.push(0);
+				}
+			}
+		}
 	},
 	move: function(){
 		for (aiChar=8; aiChar<24; aiChar++) {
@@ -259,7 +273,7 @@ var move = function(moveChar){
 		for (k=0; k<16; k++){
 			for (j=0; j <16; j++){
 				coordinates=k+"_"+j;
-				if (!(characters.position.includes(coordinates))){
+				if (!((characters.position.includes(coordinates))||(!(board.elements[coordinates].obstacles===undefined))||(board.elements[coordinates].elements=="water"))){
 					stop = characters.position[moveChar].indexOf("_");
 					moveDistancex = Math.abs(characters.position[moveChar].slice(0, stop) - k);
 					moveDistancey = Math.abs(characters.position[moveChar].slice(stop+1)- j);
