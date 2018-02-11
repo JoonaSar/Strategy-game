@@ -78,11 +78,11 @@ var board = {
 	bridges: ["4_9","5_9","6_9","7_9",
 						"4_10","5_10","6_10","7_10"],
 	//Coordinates of boulders
-	boulders: ["0_4"],
+	boulders: [],
 	//Coordinates of rocks
-	rocks: ["0_5"],
+	rocks: [],
 	//Coordinates of trees
-	trees:["0_6"],
+	trees:[],
 	create: function (){
 		this.elementsText = "{";
 		for (q=0;q<16;q++){
@@ -188,7 +188,7 @@ var turn = {
 	endAI: function(){
 		turn.player = true;
 		document.getElementById("endTurnButton").setAttribute("href", "#");
-		document.getElementById("endTurnButton").removeAttribute("onclick", "turn.end()");
+		document.getElementById("endTurnButton").setAttribute("onclick", "turn.end()");
 		document.getElementById("endTurnButton").innerHTML ="END TURN";
 		//Resets characters shot and moved values
 		for (i=0;i<8;i++){
@@ -203,12 +203,17 @@ var ai = {
 	tiles:[],
 	//Valuates all tiles on how likely to move there
 	valuate: function(char){
+		this.tiles=[];
 		for (q=0;q<16;q++){
 			for (w=0;w<16;w++){
 				coordinates=q+"_"+w;
-				//Doesn't valuate tiles with people or obstacles or water in them
-				if (!((characters.position.includes(coordinates))||(!(board.elements[coordinates].obstacles===undefined))||(board.elements[coordinates].elements=="water"))){
-					this.tiles.push(Math.random());
+				//Valuates only passable tiles
+				stop = characters.position[char].indexOf("_");
+				moveDistancex = Math.abs(characters.position[char].slice(0, stop) - q);
+				moveDistancey = Math.abs(characters.position[char].slice(stop+1)- w);
+				moveDistance = (moveDistancex + moveDistancey);
+				if (!((characters.position.includes(coordinates))||(!(board.elements[coordinates].obstacles===undefined))||(board.elements[coordinates].elements=="water")||(moveDistance>characters.moveRange[char]))){
+					this.tiles.push(1);
 				}
 				//Those unpassable tiles get a value of 0 for now (some characters could hover on water = valuate them here)
 				else {
@@ -226,8 +231,6 @@ var ai = {
 	},
 
 };
-
-
 // Variables to fix tick-function
 var tickHealth = null;
 var tickAlly = null;
@@ -260,7 +263,7 @@ var moveButtonUsed = null;
 var cancelVar = null;
 //Enables all of the available squares
 var move = function(moveChar){
-	if (characters.alive[moveChar] && (mapUse==0) && !(characters.moved[moveChar])){
+	if (characters.alive[moveChar] && (mapUse==0) && !(characters.moved[moveChar]) && turn.player){
 		k = null;
 		j = null;
 		mapUse = 1;
@@ -295,10 +298,13 @@ var move = function(moveChar){
 		else if (characters.moved[moveChar]){
 			window.alert("That character has already moved!")
 		}
+		else if (!(turn.player)) {
+			window.alert("Wait for the AI to finish it's turn!")
+		}
 	};
 };
 var shoot = function(shootChar){
-	if (characters.alive[shootChar] && (mapUse==0)){
+	if (characters.alive[shootChar] && (mapUse==0) && !(characters.shot[shootChar]) && turn.player){
 		k = null;
 		j = null;
 		mapUse = 2;
