@@ -94,8 +94,12 @@
 
 		#log{
 			flex:1 1 auto;
-			background-color: #e8ada7;
+			background-color: #0E4626;
 			overflow:auto;
+			color: white;
+			font-family: monospace;
+			font-size: 1.1em;
+			font-weight: bold;
 }
 	.rightside {
 		flex: 1 1 auto;
