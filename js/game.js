@@ -30,6 +30,9 @@ var characters = {
 	moveRange: [4,4,4,4,4,4,4,4,
 				4,4,4,4,4,4,4,4,
 				4,4,4,4,4,4,4,4],
+	shootRange: [19,19,19,19,19,19,19,19,
+				19,19,19,19,19,19,19,19,
+				19,19,19,19,19,19,19,19],
 	abilities: [null],
 	//Clears the characters, then draws all of the alive ones
 	load: function(){
@@ -221,7 +224,7 @@ var ai = {
 				moveDistancey = Math.abs(characters.position[char].slice(stop+1)- w);
 				moveDistance = (moveDistancex + moveDistancey);
 				if (!((characters.position.includes(coordinates))||(!(board.elements[coordinates].obstacles===undefined))||(board.elements[coordinates].elements=="water")||(moveDistance>characters.moveRange[char]))){
-					this.tiles.push(1 + Math.random()*0.1);
+					this.tiles.push(1 + Math.random());
 				}
 				//Those unpassable tiles get a value of 0 for now (some characters could hover on water = valuate them here)
 				else {
@@ -264,7 +267,7 @@ var ai = {
 			};
 			mapUse = 0;
 			var time = null;
-			time = setTimeout(function(){turn.endAI()}, 2000);
+			time = setTimeout(function(){turn.endAI()}, 500);
 	},
 
 };
@@ -291,7 +294,35 @@ var map = function(x, y){
 			log(logtext);
 		};
 		tick();
-	}
+	};
+	if (mapUse == 2){
+		coordinates = x +"_"+y;
+		window.alert(characters.position.indexOf(coordinates));
+		var dmg=Math.floor(Math.random()*10+10);
+		var add="";
+		var addChance=Math.random();
+		if(addChance>0.9){
+			dmg=dmg+20;
+			add="Critical hit!";
+		}
+		else if (addChance<0.2) {
+			dmg=0;
+			add="The shot missed!"
+		}
+		damage(characters.position.indexOf(coordinates), dmg);
+		if (cancelVar<8){
+			var logtext = "Ally #"+cancelVar+" shot enemy #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!"+ add;
+			add = "";
+			log(logtext);
+		};
+		if (cancelVar>8){
+			var logtext = "Enemy #"+cancelVar+" shot ally #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!";;
+			add = "";
+			log(logtext);
+		};
+		characters.shot[cancelVar] = true;
+		tick();
+	};
 } ;
 //Functions to move character number whatever, to have it shoot, or to have it use an item
 var moveChar = null;
@@ -355,15 +386,14 @@ var shoot = function(shootChar){
 		document.getElementById(shootButtonUsed).innerHTML = "Cancel";
 		for (k = 0; k<16; k++){
 			for (j=0; j <16; j++){
-				moveDistancex = Math.abs(characters.position[shootChar].slice(0, stop) - k);
-				moveDistancey = Math.abs(characters.position[shootChar].slice(stop+1)- j);
-				moveDistance = (moveDistancex + moveDistancey);
-				if (moveDistance<=characters.moveRange[shootChar]){
-						board.add(k,j);
-						}
-				for (h=0; h<characters.alliesAm.length; h++){
-					if (characters.alive[h]){
-						board.remove(characters.position[h]);
+				coordinates=k+"_"+j;
+				if (!(((characters.position.lastIndexOf(coordinates)<8)&&(characters.position.lastIndexOf(coordinates)!=-1))||(!(board.elements[coordinates].obstacles===undefined)))){
+					stop = characters.position[shootChar].indexOf("_");
+					shootDistancex = Math.abs(characters.position[shootChar].slice(0, stop) - k);
+					shootDistancey = Math.abs(characters.position[shootChar].slice(stop+1)- j);
+					shootDistance = (Math.pow(shootDistancex, 2) + Math.pow(shootDistancey,2));
+					if (shootDistance<=characters.shootRange[shootChar]){
+							board.add(k,j);
 					}
 				}
 			}
@@ -466,9 +496,5 @@ var tick = function() {
 var damageTo =null;
 var damageAmount =null;
 var damage = function(damageTo, damageAmount) {
-	//These lines are for testing only
-	damageTo = document.getElementById("dmgTo").value;
-	damageAmount = document.getElementById("dmgAm").value;
-	damageAmount = document.getElementById("dmgAm").value;
 	characters.health[damageTo] = characters.health[damageTo] - damageAmount;
 };
