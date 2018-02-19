@@ -168,6 +168,7 @@ var start = function(){
 	};
 	turn.player = true;
 	board.create();
+	turn.endAI();
 	tick();
 };
 
@@ -180,21 +181,18 @@ var turn = {
 		document.getElementById("endTurnButton").removeAttribute("href");
 		document.getElementById("endTurnButton").removeAttribute("onclick");
 		document.getElementById("endTurnButton").innerHTML ="AI's turn";
+		//Resets characters shot and moved values
 		for (i=8;i<24;i++){
-			characters.shot=false;
-			characters.moved=false;
+			characters.shot[i]=false;
+			characters.moved[i]=false;
 		};
+		ai.turn();
 		},
 	endAI: function(){
 		turn.player = true;
 		document.getElementById("endTurnButton").setAttribute("href", "#");
 		document.getElementById("endTurnButton").setAttribute("onclick", "turn.end()");
 		document.getElementById("endTurnButton").innerHTML ="END TURN";
-		//Resets characters shot and moved values
-		for (i=0;i<8;i++){
-			characters.shot=false;
-			characters.moved=false;
-		};
 	}
 };
 //Executes the AI's turn
@@ -213,7 +211,7 @@ var ai = {
 				moveDistancey = Math.abs(characters.position[char].slice(stop+1)- w);
 				moveDistance = (moveDistancex + moveDistancey);
 				if (!((characters.position.includes(coordinates))||(!(board.elements[coordinates].obstacles===undefined))||(board.elements[coordinates].elements=="water")||(moveDistance>characters.moveRange[char]))){
-					this.tiles.push(1);
+					this.tiles.push(1 + Math.random()*0.1);
 				}
 				//Those unpassable tiles get a value of 0 for now (some characters could hover on water = valuate them here)
 				else {
@@ -222,12 +220,39 @@ var ai = {
 			}
 		}
 	},
-	move: function(){
-		for (aiChar=8; aiChar<24; aiChar++) {
-			if (characers.alive[aiChar]){
-
+	indexOfMax: function(arr) {
+    if (arr.length === 0) {
+        return -1;
+    }
+    var max = arr[0];
+    var maxIndex = 0;
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+    return maxIndex;
+	},
+	time: null,
+	move: function(aiChar){
+				var y = (this.indexOfMax(this.tiles)%16);
+				var x = Math.floor(this.indexOfMax(this.tiles)/16);
+				cancelVar = aiChar;
+				mapUse = 1;
+				map(x,y);
+	},
+	turn: function(){
+		//Function that executes the AI's turn: Characters move and shoot etc.
+			for(aiCharacter = 8; aiCharacter<24; aiCharacter++){
+				if (characters.alive[aiCharacter]){
+					ai.valuate(aiCharacter);
+					ai.move(aiCharacter);
+				};
 			};
-		};
+			mapUse = 0;
+			var time = null;
+			time = setTimeout(function(){turn.endAI()}, 2000);
 	},
 
 };
@@ -245,9 +270,7 @@ var coordinates = null;
 //mapUse: 0=free to choose an action, 1=move, 2=shoot 3=use item
 var mapUse = 0;
 var map = function(x, y){
-	//This function is only in test use right now, the rest should be ok
 	coordinates = x +"_" + y;
-	document.getElementById(coordinates).style.backgroundColor = "red";
 	if (mapUse == 1){
 		characters.position[cancelVar] = x+"_"+y ;
 		characters.moved[cancelVar] = true;
@@ -335,12 +358,25 @@ var shoot = function(shootChar){
 		if (!(characters.alive[shootChar])){
 			window.alert("Error: dead men don't shoot");
 		}
-		else {
+		else if (mapUse!=0){
 			window.alert("Cancel your action before choosing a new one!")
+		}
+		else if (characters.shot[shootChar]){
+			window.alert("That character has already shot!")
+		}
+		else if (!(turn.player)) {
+			window.alert("Wait for the AI to finish it's turn!")
 		}
 	};
 };
 var item = function(itemChar){};
+var log = function(text){
+	var para = document.createElement("P");
+	var paragraph = document.createTextNode(text);
+	para.appendChild(paragraph);
+	document.getElementById("log").appendChild(para);
+}
+
 var tick = function() {
 	//Ticks after every action to refresh variables, items, health, alive and board clickability
 	for (w = 0; w<24; w++) {
@@ -389,21 +425,26 @@ var tick = function() {
 		}
 	};
 	//Clears all cancel-buttons so that they can be used again
-	if (mapUse == 1){
-		document.getElementById(moveButtonUsed).style.backgroundColor = null;
-		cancelVar = "move(" + cancelVar +");";
-		document.getElementById(moveButtonUsed).setAttribute("onclick",cancelVar);
-		document.getElementById(moveButtonUsed).innerHTML = "Move";
+	if (turn.player){
+		if (mapUse == 1){
+			var cancel = null;
+			document.getElementById(moveButtonUsed).style.backgroundColor = null;
+			cancel = "move(" + cancelVar +");";
+			document.getElementById(moveButtonUsed).setAttribute("onclick",cancel);
+			document.getElementById(moveButtonUsed).innerHTML = "Move";
+		};
+		if (mapUse == 2){
+			var cancel = null;
+			document.getElementById(shootButtonUsed).style.backgroundColor = null;
+			cancel = "shoot(" + cancelVar +");";
+			document.getElementById(shootButtonUsed).setAttribute("onclick",cancel);
+			document.getElementById(shootButtonUsed).innerHTML = "Shoot";
+		};
+		//Clears the mapUse, so that new commands can be given
+		mapUse = 0;
 	};
-	if (mapUse == 2){
-		document.getElementById(shootButtonUsed).style.backgroundColor = null;
-		cancelVar = "shoot(" + cancelVar +");";
-		document.getElementById(shootButtonUsed).setAttribute("onclick",cancelVar);
-		document.getElementById(shootButtonUsed).innerHTML = "Shoot";
-	};
-	//Clears the mapUse, so that new commands can be given
-	mapUse = 0;
 };
+
 
 //Function to deal damage (or heal) a character
 var damageTo =null;

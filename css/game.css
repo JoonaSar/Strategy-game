@@ -92,7 +92,7 @@
 					background-color:#7ecece;
 				}
 
-		.log{
+		#log{
 			flex:1 1 auto;
 			background-color: #e8ada7;
 			overflow:auto;

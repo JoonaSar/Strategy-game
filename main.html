@@ -12,7 +12,7 @@
 <div class = "overhead">
 	<div class ="overheadLeft">
 		<a id="restartButton" href="#" onclick="start();">
-			RESTART
+			START
 		</a>
 		<a id="endTurnButton" href="#" onclick="turn.end();">
 			END TURN
@@ -322,24 +322,10 @@ Left side: board and log, middle:characters, right side: actions
 					<a href="#" class="square" id="15_15" onclick="map(15, 15);"></a>
 				</div>
 		</div>
-		<div class = "log">
+		<div id = "log">
 			<p>log</p>
-			<!-- Log sends information. More is shown during the development stage.
+			<!-- Log relays information.
 			In the end damage and movement will be shown here. -->
-			<a href="#"onclick="tick();">
-					<!-- Just a development button, ticks one forward-->
-					TICK</a>
-					<br>
-					<p>Damage to character</p>
-					<br>
-				<input type="text" id="dmgTo" />
-					<br>
-					<p>Damage amount</p>
-				<input type="text" id="dmgAm" />
-					<br>
-				<a href="#"onclick="damage();">
-						DAMAGE
-						</a>
 		</div>
 	</div>
 	<div class="rightside">
