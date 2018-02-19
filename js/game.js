@@ -169,6 +169,10 @@ var start = function(){
 	turn.player = true;
 	board.create();
 	turn.endAI();
+	var logDOM = document.getElementById("log");
+	while (logDOM.hasChildNodes()) {
+		logDOM.removeChild(logDOM.childNodes[0])
+	}
 	tick();
 };
 
@@ -178,6 +182,7 @@ var turn = {
 	player: true,
 	end: function(){
 		turn.player = false;
+		log("Player passed the turn")
 		document.getElementById("endTurnButton").removeAttribute("href");
 		document.getElementById("endTurnButton").removeAttribute("onclick");
 		document.getElementById("endTurnButton").innerHTML ="AI's turn";
@@ -193,6 +198,11 @@ var turn = {
 		document.getElementById("endTurnButton").setAttribute("href", "#");
 		document.getElementById("endTurnButton").setAttribute("onclick", "turn.end()");
 		document.getElementById("endTurnButton").innerHTML ="END TURN";
+		log("AI passed the turn")
+		for (i=0;i<8;i++){
+			characters.shot[i]=false;
+			characters.moved[i]=false;
+		};
 	}
 };
 //Executes the AI's turn
@@ -238,6 +248,8 @@ var ai = {
 	move: function(aiChar){
 				var y = (this.indexOfMax(this.tiles)%16);
 				var x = Math.floor(this.indexOfMax(this.tiles)/16);
+				var logtext= "Enemy #"+(aiChar-8)+" moved to coordinates "+x+","+y;
+				log(logtext);
 				cancelVar = aiChar;
 				mapUse = 1;
 				map(x,y);
@@ -274,6 +286,10 @@ var map = function(x, y){
 	if (mapUse == 1){
 		characters.position[cancelVar] = x+"_"+y ;
 		characters.moved[cancelVar] = true;
+		if (cancelVar<8){
+			var logtext = "Ally #"+cancelVar+" moved to coordinates "+x+","+y;
+			log(logtext);
+		};
 		tick();
 	}
 } ;
@@ -318,11 +334,11 @@ var move = function(moveChar){
 		else if (mapUse!=0){
 			window.alert("Cancel your action before choosing a new one!")
 		}
-		else if (characters.moved[moveChar]){
-			window.alert("That character has already moved!")
-		}
 		else if (!(turn.player)) {
 			window.alert("Wait for the AI to finish it's turn!")
+		}
+		else if (characters.moved[moveChar]){
+			window.alert("That character has already moved!")
 		}
 	};
 };
