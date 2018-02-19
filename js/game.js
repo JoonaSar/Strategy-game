@@ -78,8 +78,8 @@ var board = {
 					"5_14","6_14","7_14","8_14","9_14",
 					"5_15","6_15","7_15","8_15"],
 	//Coordinates of bridges
-	bridges: ["4_9","5_9","6_9","7_9",
-						"4_10","5_10","6_10","7_10"],
+	bridges: ["4_9","5_9","6_9","7_9","8_9",
+						"4_10","5_10","6_10","7_10","8_10"],
 	//Coordinates of boulders
 	boulders: [],
 	//Coordinates of rocks
@@ -249,25 +249,65 @@ var ai = {
 	},
 	time: null,
 	move: function(aiChar){
-				var y = (this.indexOfMax(this.tiles)%16);
-				var x = Math.floor(this.indexOfMax(this.tiles)/16);
-				var logtext= "Enemy #"+(aiChar-8)+" moved to coordinates "+x+","+y;
-				log(logtext);
-				cancelVar = aiChar;
-				mapUse = 1;
-				map(x,y);
+		var y = (this.indexOfMax(this.tiles)%16);
+		var x = Math.floor(this.indexOfMax(this.tiles)/16);
+		var logtext= "Enemy #"+(aiChar-8)+" moved to coordinates "+x+","+y;
+		log(logtext);
+		cancelVar = aiChar;
+		mapUse = 1;
+		map(x,y);
+	},
+	shoot:function(aiChar){
+		//First everything is valued, after that the AI actually shoots someone
+		var shootable = [];
+		var shootableTiles =[];
+		var isZero = false;
+		for (var k = 0; k <16; k++){
+			// This part checs which tiles are wihtin range
+			for (var j = 0; j <16; j++){
+				coordinates = k+"_"+j;
+				stop = characters.position[aiChar].indexOf("_");
+				shootDistancex = Math.abs(characters.position[aiChar].slice(0, stop) - k);
+				shootDistancey = Math.abs(characters.position[aiChar].slice(stop+1)- j);
+				shootDistance = (Math.pow(shootDistancex, 2) + Math.pow(shootDistancey,2));
+				if (shootDistance<=characters.shootRange[aiChar]){
+					shootableTiles.push(coordinates);
+				};
+			};
+		};
+		for (var i = 0; i <8; i++) {
+			if (characters.alive[i]&&(shootableTiles.includes(characters.position[i]))){
+				//Here being close to dying makes it more likely to be shot at
+				shootable.push(101-characters.health[i])
+				isZero = true;
+			}
+			else{
+				//Now the list has 8 values in the end, some of which might have greater than zero values.
+				shootable.push(0);
+			};
+		};
+		whoToShoot = this.indexOfMax(shootable);
+		if (isZero){
+			stop = characters.position[whoToShoot].indexOf("_");
+			var x = characters.position[whoToShoot].slice(0, stop);
+			var y = characters.position[whoToShoot].slice(stop+1);
+			cancelVar = aiChar;
+			mapUse = 2;
+			map(x,y);
+		};
 	},
 	turn: function(){
 		//Function that executes the AI's turn: Characters move and shoot etc.
-			for(aiCharacter = 8; aiCharacter<24; aiCharacter++){
-				if (characters.alive[aiCharacter]){
-					ai.valuate(aiCharacter);
-					ai.move(aiCharacter);
-				};
+		for(aiCharacter = 8; aiCharacter<24; aiCharacter++){
+			if (characters.alive[aiCharacter]){
+				ai.valuate(aiCharacter);
+				ai.move(aiCharacter);
+				ai.shoot(aiCharacter);
 			};
-			mapUse = 0;
-			var time = null;
-			time = setTimeout(function(){turn.endAI()}, 500);
+		};
+		mapUse = 0;
+		var time = null;
+		time = setTimeout(function(){turn.endAI()}, 500);
 	},
 
 };
@@ -316,7 +356,7 @@ var map = function(x, y){
 				log(logtext);
 			};
 			if (cancelVar>8){
-				var logtext = "Enemy #"+cancelVar+" shot ally #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!";;
+				var logtext = "Enemy #"+(cancelVar-8)+" shot ally #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!";;
 				add = "";
 				log(logtext);
 			};
@@ -440,10 +480,12 @@ var tick = function() {
 		}
 		//Kills characters that are below 1 health, then removes them from the game
 		if ((characters.health[w] <1) && !(characters.health[w] == null)){
+			document.getElementById(characters.position[w]).style.backgroundImage = null;
 			characters.alive[w] = false;
 			characters.position[w] = null;
 			characters.health[w] = null;
-			document.getElementById(characters.position[w]).style.backgroundImage = null;
+			var logtext ="Character #"+w+" died!";
+			log(logtext);
 		}
 		//Removes or grays out dead allies' actionbars
 		if ((!(characters.alive[w]) )) {
