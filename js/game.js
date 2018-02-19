@@ -297,7 +297,6 @@ var map = function(x, y){
 	};
 	if (mapUse == 2){
 		coordinates = x +"_"+y;
-		window.alert(characters.position.indexOf(coordinates));
 		var dmg=Math.floor(Math.random()*10+10);
 		var add="";
 		var addChance=Math.random();
@@ -310,16 +309,22 @@ var map = function(x, y){
 			add="The shot missed!"
 		}
 		damage(characters.position.indexOf(coordinates), dmg);
-		if (cancelVar<8){
-			var logtext = "Ally #"+cancelVar+" shot enemy #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!"+ add;
-			add = "";
+		if (characters.position.indexOf(coordinates)!=-1) {
+			if (cancelVar<8){
+				var logtext = "Ally #"+cancelVar+" shot enemy #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!"+ add;
+				add = "";
+				log(logtext);
+			};
+			if (cancelVar>8){
+				var logtext = "Enemy #"+cancelVar+" shot ally #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!";;
+				add = "";
+				log(logtext);
+			};
+		}
+		else {
+			var logtext = "Ally #"+cancelVar+" tried shooting at nothing! Well, empty space didn't seem to care about it being shot at.";
 			log(logtext);
-		};
-		if (cancelVar>8){
-			var logtext = "Enemy #"+cancelVar+" shot ally #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!";;
-			add = "";
-			log(logtext);
-		};
+		}
 		characters.shot[cancelVar] = true;
 		tick();
 	};
