@@ -34,22 +34,41 @@ var characters = {
 				19,19,19,19,19,19,19,19,
 				19,19,19,19,19,19,19,19],
 	abilities: [null],
-	//Clears the characters, then draws all of the alive ones
+	//Clears the characters, then draws all of the alive ones (and their tooltips)
 	load: function(){
 		for (k = 0; k<16; k++){
 			for (j=0; j <16; j++){
 				coordinates = k + "_" + j;
-				document.getElementById(coordinates).style.backgroundImage = null;
+				y = document.getElementById(coordinates);
+				y.style.backgroundImage = null;
+				//Removes all old tooltips
+				if (y.hasChildNodes()) {
+					y.removeChild(y.childNodes[0]);
+				};
 			}
 		};
 		for (i = 0; i<24; i++){
 			if(characters.alive[i]){
 				if (i<8){
 					document.getElementById(characters.position[i]).style.backgroundImage = "url('img/ally.png')";
+					var info = document.createElement("Span");
+					info.className = "infoAlly";
+					var infot = i+" "+characters.names[i]+" HP: "+characters.health[i];
+					var infotext = document.createTextNode(infot);
+					info.appendChild(infotext);
+					document.getElementById(characters.position[i]).appendChild(info);
 				}
 				else {
 					document.getElementById(characters.position[i]).style.backgroundImage = "url('img/enemy.png')";
+					var info = document.createElement("Span");
+					info.className = "infoEnemy";
+					var infot = i+" "+characters.names[i]+" HP: "+characters.health[i];
+					var infotext = document.createTextNode(infot);
+					info.appendChild(infotext);
+					document.getElementById(characters.position[i]).appendChild(info);
 				}
+				//Creates a tooltip for all characters that displays name and healht on hover
+
 			}
 		}
 	}
@@ -195,7 +214,7 @@ var turn = {
 			characters.moved[i]=false;
 		};
 		ai.turn();
-		},
+	},
 	endAI: function(){
 		turn.player = true;
 		document.getElementById("endTurnButton").setAttribute("href", "#");

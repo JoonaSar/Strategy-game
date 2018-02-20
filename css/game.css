@@ -66,6 +66,7 @@
 	flex-flow: row;
 	flex-wrap:nowrap;
 	align-items: stretch;
+	background-color: #394046;
 }
 
 	.leftside {
@@ -78,6 +79,7 @@
 			background-color: #e7f7bb;
 			display:flex;
 			flex-flow:row;
+			margin: 15px;
 		}
 			.column{
 				flex: 1 1 auto;
@@ -87,9 +89,47 @@
 				.square{
 					flex: 1 1 auto;
 					border: 1px black dotted;
+					position:relative;
 				}
-				.square:hover{
-					background-color:#7ecece;
+				.square:hover .infoAlly{
+					visibility: visible;
+					opacity: 1;
+				}
+				.infoAlly{
+					visibility: hidden;
+					background-color: #88bff6;
+					color: black;
+					text-align: center;
+					padding: 5px 5px;
+					border-radius: 6px;
+					position: absolute;
+					z-index: 1;
+					opacity: 0;
+					transition: opacity 0.5s;
+					width:70px;
+					bottom:100%;
+					left:50%;
+					margin-left: -35px;
+				}
+				.square:hover .infoEnemy{
+					visibility: visible;
+					opacity: 1;
+				}
+				.infoEnemy{
+					visibility: hidden;
+					background-color: #ff9999;
+					color: black;
+					text-align: center;
+					padding: 5px 5px;
+					border-radius: 6px;
+					position: absolute;
+					z-index: 1;
+					opacity: 0;
+					transition: opacity 0.5s;
+					width:70px;
+					bottom:100%;
+					left:50%;
+					margin-left: -35px;
 				}
 
 		#log{
@@ -176,7 +216,6 @@
 				.itemButton{
 					background-color: #89af42;
 				}
-
 .credits{
 	background-color:black;
 	position:fixed;
