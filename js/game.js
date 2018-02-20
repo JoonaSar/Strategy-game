@@ -4,7 +4,7 @@ var characters = {
 	/*Defining all characters and their stuff
 	  First 8 are reserved for allies, the next 16 are for enemies*/
 	names: ["Alice","Bob","Charlie","Dave","Elisa","Fiona","Gary","Henry",
-			"Enemy","Enemy","Enemy","Enemy","Enemy","Enemy","Enemy","Enemy",
+			"Enemy 1","Enemy 2","Enemy 3","Enemy 4","Enemy 5","Enemy 6","Enemy 7","Enemy 8",
 			"Enemy","Enemy","Enemy","Enemy","Enemy","Enemy","Enemy","Enemy"],
 	health: [null, null, null, null, null, null, null, null,
 			 null, null, null, null, null, null, null, null,
@@ -53,7 +53,11 @@ var characters = {
 					document.getElementById(characters.position[i]).style.backgroundImage = "url('img/ally.png')";
 					var info = document.createElement("Span");
 					info.className = "infoAlly";
-					var infot = i+" "+characters.names[i]+" HP: "+characters.health[i];
+					var infot = characters.names[i];
+					var infotext = document.createTextNode(infot);
+					info.appendChild(infotext);
+					info.appendChild(document.createElement("BR"));
+					var infot ="HP: "+characters.health[i];
 					var infotext = document.createTextNode(infot);
 					info.appendChild(infotext);
 					document.getElementById(characters.position[i]).appendChild(info);
@@ -62,7 +66,11 @@ var characters = {
 					document.getElementById(characters.position[i]).style.backgroundImage = "url('img/enemy.png')";
 					var info = document.createElement("Span");
 					info.className = "infoEnemy";
-					var infot = i+" "+characters.names[i]+" HP: "+characters.health[i];
+					var infot = characters.names[i];
+					var infotext = document.createTextNode(infot);
+					info.appendChild(infotext);
+					info.appendChild(document.createElement("BR"));
+					var infot ="HP: "+characters.health[i];
 					var infotext = document.createTextNode(infot);
 					info.appendChild(infotext);
 					document.getElementById(characters.position[i]).appendChild(info);
@@ -270,7 +278,7 @@ var ai = {
 	move: function(aiChar){
 		var y = (this.indexOfMax(this.tiles)%16);
 		var x = Math.floor(this.indexOfMax(this.tiles)/16);
-		var logtext= "Enemy #"+(aiChar-8)+" moved to coordinates "+x+","+y;
+		var logtext= characters.names[aiChar]+" moved to coordinates "+x+","+y;
 		log(logtext);
 		cancelVar = aiChar;
 		mapUse = 1;
@@ -349,7 +357,7 @@ var map = function(x, y){
 		characters.position[cancelVar] = x+"_"+y ;
 		characters.moved[cancelVar] = true;
 		if (cancelVar<8){
-			var logtext = "Ally #"+cancelVar+" moved to coordinates "+x+","+y;
+			var logtext = characters.names[cancelVar]+" moved to coordinates "+x+","+y;
 			log(logtext);
 		};
 		tick();
@@ -361,27 +369,27 @@ var map = function(x, y){
 		var addChance=Math.random();
 		if(addChance>0.9){
 			dmg=dmg+20;
-			add="Critical hit!";
+			add=" Critical hit!";
 		}
 		else if (addChance<0.2) {
 			dmg=0;
-			add="The shot missed!"
+			add=" The shot missed!"
 		}
 		damage(characters.position.indexOf(coordinates), dmg);
 		if (characters.position.indexOf(coordinates)!=-1) {
 			if (cancelVar<8){
-				var logtext = "Ally #"+cancelVar+" shot enemy #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!"+ add;
+				var logtext = characters.names[cancelVar]+" shot at enemy "+characters.names[characters.position.indexOf(coordinates)]+ " dealing "+dmg+" points of damage!"+ add;
 				add = "";
 				log(logtext);
 			};
 			if (cancelVar>8){
-				var logtext = "Enemy #"+(cancelVar-8)+" shot ally #"+characters.position.indexOf(coordinates)+ " dealing "+dmg+" points of damage!";;
+				var logtext = characters.names[cancelvar]+" shot at "+characters.names[characters.position.indexOf(coordinates)]+ " dealing "+dmg+" points of damage!";;
 				add = "";
 				log(logtext);
 			};
 		}
 		else {
-			var logtext = "Ally #"+cancelVar+" tried shooting at nothing! Well, empty space didn't seem to care about it being shot at.";
+			var logtext = characers.names[cancelVar]+" tried shooting at nothing! Well, empty space didn't seem to care about it being shot at.";
 			log(logtext);
 		}
 		characters.shot[cancelVar] = true;
@@ -493,6 +501,7 @@ var tick = function() {
 		tickHealth = "allyHealth"+w;
 		tickAlly = "ally"+ w;
 		tickActionbar="actions"+w;
+		tickAllyName = "allyName"+w;
 		//Caps health to 100
 		if (characters.health[w] > 100) {
 			characters.health[w] = 100;
@@ -503,7 +512,7 @@ var tick = function() {
 			characters.alive[w] = false;
 			characters.position[w] = null;
 			characters.health[w] = null;
-			var logtext ="Character #"+w+" died!";
+			var logtext = characters.names[w]+" died!";
 			log(logtext);
 		}
 		//Removes or grays out dead allies' actionbars
@@ -518,6 +527,7 @@ var tick = function() {
 		}
 		else {
 			if	(w <8) {
+				document.getElementById(tickAllyName).innerHTML = characters.names[w];
 				document.getElementById(tickAlly).style.display = "";
 				document.getElementById(tickActionbar).style.display = "";
 			}
